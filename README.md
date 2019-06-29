@@ -39,14 +39,14 @@ npm run dev
 http://localhost:8088
 
 ## ScreenShots
-![KafkaDashboard](https://github.com/tinawenqiao/Kafka-zk-restapi-UI/blob/master/screenshots/KafkaDashboard.png)
-![TopicManage](https://github.com/tinawenqiao/Kafka-zk-restapi-UI/blob/master/screenshots/TopicManage.png)
-![TopicPartitionView](https://github.com/tinawenqiao/Kafka-zk-restapi-UI/blob/master/screenshots/TopicPartitionView.png)
-![ConsumersGetByTopic](https://github.com/tinawenqiao/Kafka-zk-restapi-UI/blob/master/screenshots/ConsumersGetByTopic.png)
-![ManualReassignPartitions](https://github.com/tinawenqiao/Kafka-zk-restapi-UI/blob/master/screenshots/ManualReassignPartitions.png)
-![MessageView](https://github.com/tinawenqiao/Kafka-zk-restapi-UI/blob/master/screenshots/MessageView.png)
-![SchemaView](https://github.com/tinawenqiao/Kafka-zk-restapi-UI/blob/master/screenshots/SchemaView.png)
-![ConsumerGroup](https://github.com/tinawenqiao/Kafka-zk-restapi-UI/blob/master/screenshots/ConsumerGroup.png)
-![TopicsGetByGroup](https://github.com/tinawenqiao/Kafka-zk-restapi-UI/blob/master/screenshots/TopicsGetByGroup.png)
-![ConsumersGetByGroupAndTopic](https://github.com/tinawenqiao/Kafka-zk-restapi-UI/blob/master/screenshots/ConsumersGetByGroupAndTopic.png)
+![KafkaDashboard](https://github.com/gnuhpc/Kafka-zk-restapi-UI/blob/master/screenshots/KafkaDashboard.png)
+![TopicManage](https://github.com/gnuhpc/Kafka-zk-restapi-UI/blob/master/screenshots/TopicManage.png)
+![TopicPartitionView](https://github.com/gnuhpc/Kafka-zk-restapi-UI/blob/master/screenshots/TopicPartitionView.png)
+![ConsumersGetByTopic](https://github.com/gnuhpc/Kafka-zk-restapi-UI/blob/master/screenshots/ConsumersGetByTopic.png)
+![ManualReassignPartitions](https://github.com/gnuhpc/Kafka-zk-restapi-UI/blob/master/screenshots/ManualReassignPartitions.png)
+![MessageView](https://github.com/gnuhpc/Kafka-zk-restapi-UI/blob/master/screenshots/MessageView.png)
+![SchemaView](https://github.com/gnuhpc/Kafka-zk-restapi-UI/blob/master/screenshots/SchemaView.png)
+![ConsumerGroup](https://github.com/gnuhpc/Kafka-zk-restapi-UI/blob/master/screenshots/ConsumerGroup.png)
+![TopicsGetByGroup](https://github.com/gnuhpc/Kafka-zk-restapi-UI/blob/master/screenshots/TopicsGetByGroup.png)
+![ConsumersGetByGroupAndTopic](https://github.com/gnuhpc/Kafka-zk-restapi-UI/blob/master/screenshots/ConsumersGetByGroupAndTopic.png)
 
