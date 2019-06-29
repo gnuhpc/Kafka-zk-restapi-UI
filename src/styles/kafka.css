@@ -1,0 +1,224 @@
+.margin-left0 {
+    margin-left: 0px !important;
+  }
+  
+  .margin-left10 {
+    margin-left: 10px;
+  }
+  
+  .margin-bot0 {
+    margin-bottom: 0px !important;
+  }
+  
+  .margin-bot-top5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .margin-top10 {
+    margin-top: 10px;
+  }
+
+  .margin-top20 {
+    margin-top: 20px;
+  }
+  
+  .margin-bot-top10 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  
+  .margin-left10 {
+    margin-left: 10px;
+  }
+  
+  .margin-top25 {
+    margin-top: 25px;
+  }
+  
+  .tableBox {
+     font-size: 13px;
+     margin-bottom: 10px;
+     margin-top: 10px;
+     width: 100%;
+     border-spacing: 0;
+   }
+
+   .tableConfig{
+     line-height: 3;
+     text-align: left;
+   }
+  
+  .table-border {
+    border: 1px solid #EBEBEB;
+  }
+  
+  .table-border > tr > td,
+  .table-border > tr > th {
+    border: 1px solid #ddd;
+    border-bottom-width: 0;
+    border-left-width: 0;
+  }
+  .table-border-box{
+    border: 1px solid #EBEBEB;
+  }
+  
+  .tableBox > thead > tr > th,
+  .tableBox > tfoot > tr > th,
+  .tableBox > tbody > tr > th,
+  .tableBox > thead > tr > td,
+  .tableBox > tbody > tr > td,
+  .tableBox > tfoot > tr > td,
+  .tableBox > tr > td {
+    border-top: 1px solid #e7eaec;
+    line-height: 1.42857;
+    padding: 8px;
+    vertical-align: middle;
+    text-align: left;
+  }
+
+  .tableManage{
+    width: 100%;
+    border: 1px solid #e5e5e5;
+    margin-bottom:5px;
+  }
+  .tableManage td{
+    text-align: center;
+    border-right:1px dashed #e5e5e5;
+    padding: 5px 0;
+  }
+  .tableManage td:nth-of-type(6){
+    border-right:1px solid transparent;
+  }
+  .tableManage label{
+    color: #333;
+    font-size: 14px;
+    font-weight: 700;    
+  }
+
+  .tableManage span{
+    font-size: 14px;
+  }
+  
+  .box-card {
+    width: 100%;
+  }
+  
+  .el-collapse-item__arrow {
+    line-height: 48px !important;
+  }
+  
+  .el-dialog__headerbtn {
+    font-size: 13px !important;
+  }
+  
+  .overflow-auto {
+    overflow: auto;
+  }
+  
+  .broker-box label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+  }
+  
+  .bg-blue {    
+    background: url('../assets/kafkaImg/kafka-paas_03-02.png') 0 0 no-repeat;
+    background-size:100%; 
+  }  
+  
+  .bg-darkYellow {
+    background: url('../assets/kafkaImg/kafka-paas_03-03.png') 0 0 no-repeat;
+    background-size:100%;
+  }
+  
+  .bg-green {
+    background: url('../assets/kafkaImg/kafka-paas_03.png') 0 0 no-repeat;
+    background-size:100%;
+  }
+
+  .bg-orange {
+    background: url('../assets/kafkaImg/kafka-paas_03-05.png') 0 0 no-repeat;
+    background-size:100%;
+  }
+
+  .bg-lightBlue {
+    background: url('../assets/kafkaImg/kafka-paas_03-06.png') 0 0 no-repeat;
+    background-size:100%;
+  }
+
+  .bg-yellow {
+    background: url('../assets/kafkaImg/kafka-paas_03-04.png') 0 0 no-repeat;
+    background-size:100%;
+  }
+  
+  .white-color {
+    color: white;
+  }
+  
+  .bg-height {
+    height: 120px;
+  }
+  
+  .box-content {
+    width: calc(100% - 100px);
+    height: 100%;
+  }
+
+  .totalBox{
+    box-sizing: border-box;
+    width:100%;
+    height:calc(100vh - 230px);
+    border: 1px solid #e5e5e5;
+    padding:30px 0;
+    background-color: #fff;
+  }
+
+  .font-bolder{
+    font-weight:bolder;
+  }
+  
+  .font-size-50 {
+    font-size: 50px !important;
+  }
+  
+  .font-size-40 {
+    font-size: 40px;
+  }
+
+  .font-size-20 {
+    font-size: 20px;
+  }
+  
+  .box-h {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-bottom: 0px;
+  }
+  
+  .broker-box {
+    width: 120px;
+    min-height: 150px;
+    border: 1px solid #999;
+    text-align: center;
+    margin: 5px;
+    color: #676a6c;
+  }
+  
+  .broker-partition {
+    /* border: 1px solid #adacac; */
+    width: 100px;
+    background: #60adef;
+    color: #676a6c;
+    position: relative;
+  }
+  
+  .broker-partition-dashed {
+    /* border: 1px dashed #DDDDDD; */
+    width: 100px;
+    background: #3ecf9c;
+    color: #676a6c;
+    position: relative;
+  }

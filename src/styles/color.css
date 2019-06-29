@@ -1,0 +1,96 @@
+
+.bg-gr{
+    background: #0ecabd
+}
+.bg-red{
+    background: #ff946c
+}
+.bg-blue{
+    background: #198def
+}
+.bg-gray{
+    background: #bda3af
+}
+.bg-brand{
+    background: #49A5FA
+}
+.bg-ye{
+    background: #f18f1d
+}
+.bg-grdeep{
+    background: #34bfa3
+}
+.bg-yedeep{
+    background: #f68502
+}
+.bg-pur{
+    background: #cf8bf3
+}
+.bg-purdeep{
+    background: #a770ef
+}
+.bg-sky{
+    background: #ecf5ff
+}
+.color01{
+    color: #198def !important
+}
+.color02{
+    color: #ff9900  !important
+}
+.color03{
+    color: #00cf88  !important
+}
+.color04{
+    color: #fecd00  !important
+}
+.color05{
+    color: #f25100  !important
+}
+.color06{
+    color: #49a5fa  !important
+}
+/* 状态小点 */
+.statusSpan{
+    display:inline-block;
+    width:5px;
+    height:5px;
+    border-radius: 50%;
+    margin-bottom: 2px;
+}
+.statusStop{
+    background:#F40000;
+    border-color:#F40000;
+}
+.statusStart{
+    background:#00CF88;
+    border-color:#00CF88;
+}
+.statusWait{
+    background:#FECD00;
+    border-color:#FECD00;
+}
+.status01{
+    background:#198def;
+    border-color:#198def;
+}
+.status02{
+    background:#ff9900;
+    border-color:#ff9900;
+}
+.status03{
+    background:#00cf88;
+    border-color:#00cf88;
+}
+.status04{
+    background:#fecd00;
+    border-color:#fecd00;
+}
+.status05{
+    background:#f25100;
+    border-color:#f25100;
+}
+.status06{
+    background:#49a5fa;
+    border-color:#49a5fa;
+}

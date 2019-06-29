@@ -1,0 +1,36 @@
+.paas-side{
+    width:100%;
+    display: flex;
+  }
+.paas-left{
+    width:180px;
+    min-width: 180px;
+    height:100%;
+  }
+.paas-left .el-menu-item{
+    background:white;
+}
+.paas-left .el-submenu .el-menu-item {
+    min-width: 180px;
+    height: 33px;
+    line-height: 33px;
+    font-size:12px;
+    font-size: 13px;
+    background: #f4f4f5!important;
+}
+ .paas-left .el-col-12 {
+    width: 100%;
+  }
+ .paas-right{
+    flex:1;
+  }
+
+.paas-left .el-submenu .el-submenu__title {
+    height: 45px;
+    line-height: 45px;
+    font-size: 13px;
+}
+.paas-left .el-submenu .el-menu-item {
+    font-size: 13px;
+    background: #f4f4f5!important;
+}

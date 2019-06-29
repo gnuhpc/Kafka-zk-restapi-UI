@@ -1,0 +1,33 @@
+.page{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 2px;
+    height: 35px;
+ }
+ .page>div{
+    margin-top: 10px;
+ } 
+ 
+ .page span{
+    font-size:14px;
+    font-weight: 400;
+    color: #606266; 
+    font-family: Arial, Helvetica, sans-serif;
+ }
+ .pullright{
+  position: relative;
+}
+.el-pagination {
+  display:inline-block;
+  position: absolute;;
+  right: 1rem;
+  top: 1rem;
+}
+.page{
+  width:60px;
+  line-height: 27px;
+  height: 32px;
+  position: absolute;
+  right: 18rem;
+  top: 1rem;
+}

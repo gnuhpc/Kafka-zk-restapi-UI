@@ -1,0 +1,112 @@
+
+  *{
+    padding: 0;
+    margin: 0;
+    font-family:  "Microsoft YaHei","simsun";
+    /* font-family: Arial, Helvetica, sans-serif; */
+  }
+/*  
+  .el-breadcrumb{
+    margin-top: 5px;
+    line-height: 20px;
+    display: inline-block;
+  } */
+  /* 版心 */
+.w{
+    width: 1100px;
+    margin: 0 auto;
+  }
+  /* 页面整体盒子 */
+  .container-box{
+    padding: 0 10px 10px 10px;
+    background: #fff;
+  }
+  /* 区域盒子 */
+  .infobox{
+    box-shadow: 0px 1px 5px 2px #e7eaec;
+  padding: 5px;
+  }
+  /* 滚动条 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #d3d3d3;
+    border-radius: 5px;
+  }
+  .padding-top10{
+    padding-top: 10px;
+  }
+  .margin-top20{
+    margin-top: 20px;
+  }
+  .margin-bottom20{
+    margin-bottom: 20px;
+  }
+  .margin-top10{
+    margin-top: 10px;
+  }
+  .margin-top15{
+    margin-top: 15px;
+  }
+  .margin-top5{
+    margin-top: 5px;
+  }
+  .mg-right10{
+    margin-right:10px
+  }
+  .el-menu-item-group__title {
+    padding: 0 0 0 20px !important;
+  }
+  .el-menu--vertical{
+    left:50px!important;
+  }
+  .el-tooltip__popper[x-placement^=right].is-dark{
+    margin-left:0;
+  }
+  .el-tooltip__popper{
+    max-width:400px;
+    line-height:150%;
+  }
+  .el-tooltip__popper.is-dark{
+    background-color: #198def !important;
+    color: #fff !important;
+    cursor: pointer;
+  }
+  .el-tooltip__popper[x-placement^=top] .popper__arrow::after,
+  .el-tooltip__popper[x-placement^=top] .popper__arrow{
+    border-top-color:#198def !important;
+  }
+  .el-tooltip__popper[x-placement^=left] .popper__arrow::after,
+  .el-tooltip__popper[x-placement^=left] .popper__arrow{
+    border-left-color:#198def !important;
+  }
+  .el-tooltip__popper[x-placement^=right] .popper__arrow::after,
+  .el-tooltip__popper[x-placement^=right] .popper__arrow{
+    border-right-color:#198def !important;
+  }
+  .el-tooltip__popper[x-placement^=bottom] .popper__arrow::after,
+  .el-tooltip__popper[x-placement^=bottom] .popper__arrow{
+    border-bottom-color:#198def !important;
+  }
+  ul li{
+    list-style-type: none;
+  }
+  .fr{
+    float: right;
+  }
+  .fl{
+    float: left;
+  }
+  hr{
+    margin: 8px 0;
+  }
+ 
+  .textRight{
+    text-align: right;
+  }
+
+  body{
+    background: #f8f8f8;
+  }

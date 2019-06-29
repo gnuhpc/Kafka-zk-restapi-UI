@@ -1,0 +1,173 @@
+/*自定义公共样式*/
+.paas_content {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  background-color: #f8f8f8;
+}
+.paas_contentMain{
+  box-sizing: border-box;
+  /* padding: 20px 46px; */
+  padding: 16px 12px;
+  width: 100%;
+  background-color: #f8f8f8;
+}
+
+.paas_block {
+  background-color: #fff;
+  padding: 20px 16px;
+  margin-bottom: 10px;
+  /* box-shadow: 0 1px 5px 2px #e7eaec; */
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+}
+
+.paas_blockKafka {
+  background-color: #fff;
+  padding: 10px 16px;
+  margin-bottom: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+}
+.paas_blockMain{
+  border: 1px solid #e5e5e5;
+  margin-bottom: 16px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.paas_title {
+  font-size: 14px;
+  font-weight: 900;
+  color: #333;
+  padding: 0 20px;
+  /* border-left: #198def 4px solid; */
+  margin: 5px 0;
+  position: relative;
+}
+.paas_title::before{
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: -16px;
+  border-left: #198def 4px solid;
+  height: 14px
+}
+
+
+
+/*控件样式
+*
+*/
+
+/*输入框*/
+.el-input {
+  width: 100%;
+}
+.el-input__inner{
+  border-radius: 0;
+}
+
+/*选择器*/
+.el-select {
+  width: 100%;
+}
+
+/*时间选择器*/
+.el-date-editor.el-input, .el-date-editor.el-input__inner {
+  width: 100%;
+}
+
+
+/*表单*/
+.el-form-item {
+  margin-bottom: 10px;
+}
+
+/*菜单*/
+.el-menu {
+  border: 0;
+}
+/* .el-form-item__error{
+  padding-top: 6px !important;
+} */
+
+/*表格*/
+.el-table th {
+  background-color: #f8f8f8;
+  font-weight: 700;
+  color: #666666;
+  text-align: left;
+  padding: 5px 0;
+  font-size: 10px;
+  line-height: 10px;
+    /* font-size: 20px;
+  -webkit-transform-origin-x: 0;
+  -webkit-transform: scale(0.5); */
+}
+
+.el-table td {
+  padding: 5px 0;
+  text-align: left;
+  font-size: 10px;
+  line-height: 10px;
+  color: #121212;
+  /* font-size: 20px;
+  -webkit-transform-origin-x: 0;
+  -webkit-transform: scale(0.5); */
+}
+/* 分页 */
+.el-pagination--small .el-input--mini .el-input__inner {
+  height: 24px;
+  line-height: 24px;
+}
+.el-submenu .el-menu-item {
+  min-width: 114px;
+  padding-right: 25px
+}
+/* 按钮 */
+.el-button,.el-textarea__inner{
+  border-radius: 0;
+}
+/* 弹框 */
+.el-menu--popup,
+.el-menu--popup-bottom-start{
+padding: 0;
+}
+.el-message-box__content {
+  max-height: 300px;
+  overflow-y: scroll
+}
+/* 字体 */
+.paas-font8{
+  font-size: 16px;
+  -webkit-transform-origin-x: 0;
+  -webkit-transform: scale(0.5);
+}
+.paas-font10{
+  font-size: 20px;
+  -webkit-transform-origin-x: 0;
+  -webkit-transform: scale(0.5);
+}
+/* 排序 */
+.el-table .caret-wrapper {
+  height: 0;
+}
+.el-table .sort-caret.ascending {
+  bottom: 2px;
+  top:-11px;
+}
+.el-table .sort-caret.descending {
+  top: 0px;
+}
+/* 悬浮 */
+.el-menu--vertical .el-menu--popup-right-start, .el-menu--vertical .el-menu-item{  
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  padding-left:0px;
+}
+
+.el-menu--horizontal .el-menu--popup-bottom-start{
+  margin-top: 0px; 
+}

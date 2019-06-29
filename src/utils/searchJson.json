@@ -1,0 +1,466 @@
+{
+    "list": [
+        {
+            "value": "get"
+        },
+        {
+            "value": "set"
+        },
+        {
+            "value": "setnx"
+        },
+        {
+            "value": "setex"
+        },
+        {
+            "value": "psetex"
+        },
+        {
+            "value": "append"
+        },
+        {
+            "value": "strlen"
+        },
+        {
+            "value": "del"
+        },
+        {
+            "value": "unlink"
+        },
+        {
+            "value": "exists"
+        },
+        {
+            "value": "setbit"
+        },
+        {
+            "value": "getbit"
+        },
+        {
+            "value": "bitfield"
+        },
+        {
+            "value": "setrange"
+        },
+        {
+            "value": "getrange"
+        },
+        {
+            "value": "substr"
+        },
+        {
+            "value": "incr"
+        },
+        {
+            "value": "decr"
+        },
+        {
+            "value": "mget"
+        },
+        {
+            "value": "rpush"
+        },
+        {
+            "value": "lpush"
+        },
+        {
+            "value": "rpushx"
+        },
+        {
+            "value": "lpushx"
+        },
+        {
+            "value": "linsert"
+        },
+        {
+            "value": "rpop"
+        },
+        {
+            "value": "lpop"
+        },
+        {
+            "value": "brpop"
+        },
+        {
+            "value": "brpoplpush"
+        },
+        {
+            "value": "blpop"
+        },
+        {
+            "value": "llen"
+        },
+        {
+            "value": "lindex"
+        },
+        {
+            "value": "lset"
+        },
+        {
+            "value": "lrange"
+        },
+        {
+            "value": "ltrim"
+        },
+        {
+            "value": "lrem"
+        },
+        {
+            "value": "rpoplpush"
+        },
+        {
+            "value": "sadd"
+        },
+        {
+            "value": "srem"
+        },
+        {
+            "value": "smove"
+        },
+        {
+            "value": "sismember"
+        },
+        {
+            "value": "scard"
+        },
+        {
+            "value": "spop"
+        },
+        {
+            "value": "srandmember"
+        },
+        {
+            "value": "sinter"
+        },
+        {
+            "value": "sinterstore"
+        },
+        {
+            "value": "sunion"
+        },
+        {
+            "value": "sunionstore"
+        },
+        {
+            "value": "sdiff"
+        },
+        {
+            "value": "sdiffstore"
+        },
+        {
+            "value": "smembers"
+        },
+        {
+            "value": "sscan"
+        },
+        {
+            "value": "zadd"
+        },
+        {
+            "value": "zincrby"
+        },
+        {
+            "value": "zrem"
+        },
+        {
+            "value": "zremrangebyscore"
+        },
+        {
+            "value": "zremrangebyrank"
+        },
+        {
+            "value": "zremrangebylex"
+        },
+        {
+            "value": "zunionstore"
+        },
+        {
+            "value": "zinterstore"
+        },
+        {
+            "value": "zrange"
+        },
+        {
+            "value": "zrangebyscore"
+        },
+        {
+            "value": "zrevrangebyscore"
+        },
+        {
+            "value": "zrangebylex"
+        },
+        {
+            "value": "zrevrangebylex"
+        },
+        {
+            "value": "zcount"
+        },
+        {
+            "value": "zlexcount"
+        },
+        {
+            "value": "zrevrange"
+        },
+        {
+            "value": "zcard"
+        },
+        {
+            "value": "zscore"
+        },
+        {
+            "value": "zrank"
+        },
+        {
+            "value": "zrevrank"
+        },
+        {
+            "value": "zscan"
+        },
+        {
+            "value": "hset"
+        },
+        {
+            "value": "hsetnx"
+        },
+        {
+            "value": "hget"
+        },
+        {
+            "value": "hmset"
+        },
+        {
+            "value": "hmget"
+        },
+        {
+            "value": "hincrby"
+        },
+        {
+            "value": "hincrbyfloat"
+        },
+        {
+            "value": "hdel"
+        },
+        {
+            "value": "hlen"
+        },
+        {
+            "value": "hstrlen"
+        },
+        {
+            "value": "hkeys"
+        },
+        {
+            "value": "hvals"
+        },
+        {
+            "value": "hgetall"
+        },
+        {
+            "value": "hexists"
+        },
+        {
+            "value": "hscan"
+        },
+        {
+            "value": "incrby"
+        },
+        {
+            "value": "decrby"
+        },
+        {
+            "value": "incrbyfloat"
+        },
+        {
+            "value": "getset"
+        },
+        {
+            "value": "module"
+        },
+        {
+            "value": "mset"
+        },
+        {
+            "value": "msetnx"
+        },
+        {
+            "value": "randomkey"
+        },
+        {
+            "value": "swapdb"
+        },
+        {
+            "value": "move"
+        },
+        {
+            "value": "rename"
+        },
+        {
+            "value": "renamenx"
+        },
+        {
+            "value": "expire"
+        },
+        {
+            "value": "expireat"
+        },
+        {
+            "value": "pexpire"
+        },
+        {
+            "value": "pexpireat"
+        },
+        {
+            "value": "keys"
+        },
+        {
+            "value": "scan"
+        },
+        {
+            "value": "auth"
+        },
+        {
+            "value": "echo"
+        },
+        {
+            "value": "type"
+        },
+        {
+            "value": "multi"
+        },
+        {
+            "value": "exec"
+        },
+        {
+            "value": "discard"
+        },
+        {
+            "value": "sort"
+        },
+        {
+            "value": "touch"
+        },
+        {
+            "value": "pttl"
+        },
+        {
+            "value": "persist"
+        },
+        {
+            "value": "role"
+        },
+        {
+            "value": "subscribe"
+        },
+        {
+            "value": "unsubscribe"
+        },
+        {
+            "value": "psubscribe"
+        },
+        {
+            "value": "punsubscribe"
+        },
+        {
+            "value": "publish"
+        },
+        {
+            "value": "pubsub"
+        },
+        {
+            "value": "watch"
+        },
+        {
+            "value": "unwatch"
+        },
+        {
+            "value": "migrate"
+        },
+        {
+            "value": "readonly"
+        },
+        {
+            "value": "readwrite"
+        },
+        {
+            "value": "dump"
+        },
+        {
+            "value": "object"
+        },
+        {
+            "value": "memory"
+        },
+        {
+            "value": "eval"
+        },
+        {
+            "value": "evalsha"
+        },
+        {
+            "value": "script"
+        },
+        {
+            "value": "bitop"
+        },
+        {
+            "value": "bitcount"
+        },
+        {
+            "value": "bitpos"
+        },
+        {
+            "value": "wait"
+        },
+        {
+            "value": "command"
+        },
+        {
+            "value": "geoadd"
+        },
+        {
+            "value": "georadius"
+        },
+        {
+            "value": "georadius_ro"
+        },
+        {
+            "value": "georadiusbymember"
+        },
+        {
+            "value": "georadiusbymember_ro"
+        },
+        {
+            "value": "geohash"
+        },
+        {
+            "value": "geopos"
+        },
+        {
+            "value": "geodist"
+        },
+        {
+            "value": "pfselftest"
+        },
+        {
+            "value": "pfadd"
+        },
+        {
+            "value": "pfcount"
+        },
+        {
+            "value": "pfmerge"
+        },
+        {
+            "value": "pfdebug"
+        },
+        {
+            "value": "post"
+        },
+        {
+            "value": "host"
+        },
+        {
+            "value": "latency"
+        }
+    ]
+}

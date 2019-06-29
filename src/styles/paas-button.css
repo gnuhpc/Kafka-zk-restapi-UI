@@ -1,0 +1,37 @@
+[class*="paas-button"].el-button {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+    -webkit-appearance: none;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: 0;
+    margin: 0;
+    -webkit-transition: .1s;
+    transition: .1s;
+    font-weight: 500;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 4px;  
+}
+.paas-button-medium{
+    padding: 10px 20px  !important;
+    font-size: 14px  !important;
+    border-radius: 4px  !important;
+}
+.paas-button-small{
+    padding: 9px 15px !important;
+    font-size: 12px  !important;
+    border-radius: 3px  !important;
+}
+.paas-button-mini{
+    font-size: 12px  !important;
+    border-radius: 3px !important;
+    padding: 7px 15px !important;
+}
+

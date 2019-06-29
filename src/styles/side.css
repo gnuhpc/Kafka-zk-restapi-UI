@@ -1,0 +1,120 @@
+.sideHeader{
+  width:100%;
+}
+
+.side {
+  width: 100%;
+  display: flex;
+}
+.left>>>.el-submenu__title{
+  height: 44px !important;
+  line-height: 44px !important; 
+  font-size: 13px; 
+  border-bottom:1px solid #f8f8f8;  
+}
+
+.left>>>.el-menu-item{
+  height: 44px;
+  line-height: 44px; 
+  font-size: 13px;
+  border-bottom:1px solid #f8f8f8;
+}
+ /* 菜单关闭 */
+ .left>>>.el-submenu>.el-submenu__title .el-submenu__icon-arrow{
+  -webkit-transform: rotateZ(-90deg);
+  -ms-transform:rotate(-90deg);
+  transform: rotateZ(-90deg);
+}
+/* 菜单展开 */
+.left>>>.el-submenu.is-opened>.el-submenu__title .el-submenu__icon-arrow{
+  -webkit-transform: rotateZ(180deg);
+  -ms-transform:rotate(180deg);
+  transform: rotateZ(180deg);
+}
+.left>>>.el-submenu.is-active.is-opened .el-submenu__title{
+  background: #198def !important;
+}
+
+.left>>>.el-submenu.is-active.is-opened .el-submenu__title i,
+.left>>>.el-submenu.is-active.is-opened .el-submenu__title span{  
+  color:#fff !important;
+}
+
+.el-submenu.is-opened>>>.el-menu-item-group>.el-menu-item-group__title{
+  height:1px !important;
+}
+.left>>>.el-submenu.is-opened .el-menu-item,
+.left>>>.el-submenu.is-active.is-opened .el-menu-item.is-active{
+  width:200px;
+  box-sizing:border-box;
+  margin-left:-20px !important;
+}
+
+.left>>>.el-submenu.is-opened .el-menu-item:hover,
+.left>>>.el-submenu.is-active.is-opened .el-menu-item.is-active:hover{
+  color:#fff!important;
+  background: #198def !important;
+  padding:0 2px;  
+}
+
+.left>>>.el-submenu.is-active.is-opened .el-menu-item.is-active{
+  color:#198def !important;
+  background: #fff!important;
+}
+
+.left>>>.el-submenu.is-opened .el-menu.el-menu--inline {
+  /* background-color: #f8f8f8; */
+  padding:0 10px 0 20px;
+}
+
+.left>>>.el-submenu.is-opened .el-menu.el-menu--inline span{
+  padding-left:4px;
+}
+
+.left>>>.el-menu-item.is-active,
+.left>>>.el-menu--collapse .el-submenu.is-active{
+  color: #fff !important;
+  background-color: #198def !important;
+}
+
+.left>>>.el-menu--collapse .el-submenu.is-active .el-submenu__title i{
+  color: #fff !important;
+}
+
+.left>>>.el-menu--collapse .el-submenu.is-active .el-submenu__title:hover i{
+  color:#fff!important;
+}
+
+.left{
+  height: calc(100vh - 100px);
+  background: #fff;
+  position: relative;
+  display: inline-block;
+  margin-top:1px;
+  border-right:1px solid #e5e5e5;
+}
+
+.leftmax {
+  width: 180px;
+  border-right:1px solid #e5e5e5;
+}
+
+.leftMin {
+  width: 50px;
+}
+
+.right{
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  display: inline-block;
+}
+
+.rightMax {
+  width: calc(100% - 50px);
+}
+
+.rightMin {
+  width: calc(100% - 180px);
+}
+
+

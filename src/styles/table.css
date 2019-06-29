@@ -1,0 +1,52 @@
+.tableHeader th{
+  background-color: #f8f8f8;
+  font-weight: 700;
+  color: #666;
+  text-align: center;
+  padding: 5px;
+  /* line-height: 14px; */
+  font-size: 8px;
+}
+.tableHeader td{
+  text-align: center;
+  font-size: 10px;
+}
+.table-ellipsis{
+  table-layout: fixed;
+}
+.table-ellipsis th,.table-ellipsis td{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.table-border {
+  border-bottom: 1px solid #ebeef5;
+}
+
+.table {
+  font-size: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 100%;
+  border-spacing: 0;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td,
+.table > tr > td {
+  /* border-top: 1px solid #ebeef5; */
+  line-height: 1.42857;
+  padding: 8px;
+  vertical-align: middle;
+  text-align: center;
+}
+.table tr:hover>td {
+  background-color: #f5f7fa;
+  transition: background-color .25s ease
+}
+.pagination .el-pagination{
+  position: static;
+}

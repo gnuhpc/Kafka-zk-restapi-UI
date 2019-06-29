@@ -1,0 +1,108 @@
+
+id: {type: String, require: true},//控件ID
+data: {type: Array, require: true},//表格显示的数据集合
+category: {type: Array, require: true},//表格列集合
+total: {type: Number, require: false},//表格总数量
+size:{type:Number,require:false},//表格当前默认的条数
+handles:{type: Array, require: false},//表格操作数据
+isSelect: {type: Boolean, require: false},//是否包含选择框
+isPaging: {type: Boolean, require: false},//是否显示分页
+isIndex: {type: Boolean, require: false},//是否显示序号
+
+
+
+**********************************************************主要功能*************************************************************
+一、表格数据
+1.输入参数:v-bind:data
+2.参数数据:[
+            {key1:value1,key2:value2,key3:value3,……},
+            ……
+           ]
+注:参数数据来源于后台返回数据list
+
+
+二、表格列数据
+1.输入参数:v-bind:category
+2.参数数据:[
+            {
+              label:'平台',       //label表示列名(必传)
+              prop:'platformName' //prop表示列名对应数据列表(一、表格数据)中的key(必传)
+            }
+            ……
+           ]
+注:参数数据由自己定义,数组元素顺序及表示表格列的排列顺序
+
+
+
+
+
+**********************************************************附加功能*************************************************************
+
+一、单独对某列某行字体样式设置
+1.输入参数:v-bind:category
+2.参数数据:[
+            {
+              label: '平台',          //列名(必传)
+              prop: 'platformName',   //列名对应数据列表中的key(必传)
+              style:{color:'#ff0000'},//列样式(非必传,不设置时可省略)
+              itemStyle:[             //单独行(非必传,不设置时可省略)
+                          {
+                            index:2,  //行号
+                            style:{color:'#00ff00',textAlign:'left'}  //行样式
+                          }
+                          ……
+              ]
+            }
+            ……
+           ]
+注:列样式只同步所有行样式,不同步列表头样式
+
+
+二、单独对某列表头字体样式设置
+1.输入参数:v-bind:category
+2.参数数据:[
+            {
+              label: '平台',          //列名(必传)
+              prop: 'platformName',   //列名对应数据列表中的key(必传)
+              headerStyle:{color:'#ff0000'},//列表头样式(非必传,不设置时可省略)
+            }
+            ……
+           ]
+
+三、单独对某列宽度设置
+1.输入参数:v-bind:category
+2.参数数据:[
+            {
+              label: '平台',          //列名(必传)
+              prop: 'platformName',   //列名对应数据列表中的key(必传)
+              width:  10             //列宽(非必传,表示百分比)
+            }
+            ……
+           ]
+注:列宽采用百分比方式,要求每一列必须同时设置width或者同时不设置width,以达到等比例缩放
+    所有列的数值综合等于100即表示当前是全屏展示,若大于100即表示通过滚动条滚动
+
+
+四、分页功能
+1.输入参数:v-bind:isPaging
+2.监听方法:v-on:refresh-data
+3.返回参数:pageNum表示当前选中的页码,pageSize表示当前选中的每页显示个数
+
+
+五、批量操作功能:
+1.输入参数:v-bind:isSelect
+2.监听方法:v-on:select-change
+3.返回参数:indexs表示当前选中的所有行的index
+
+
+六、操作列功能
+1.输入参数:v-bind:handles
+2.参数数据:[
+             [{name:'增加',type:0},{name:'修改',type:1},{name:'删除',type:2},……],
+             [{name:'修改',type:1},{name:'删除',type:2},……],
+             ……
+           ]
+注:参数数据数组的数量跟列表每页的数据条数保持一致,单个数组的数量跟当前行的操作种类保持一致
+
+3.监听方法:handle-click
+4.返回参数:rowIndex表示当前点击的是第几行的数据,type表示传入操作数据列表的type
