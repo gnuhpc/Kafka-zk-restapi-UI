@@ -8,7 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import axios from 'axios'
 import store from './store'
-import "babel-polyfill"
+import "@babel/polyfill"
 import  VueCodemirror from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
 import VueClipboard  from 'vue-clipboard2'
