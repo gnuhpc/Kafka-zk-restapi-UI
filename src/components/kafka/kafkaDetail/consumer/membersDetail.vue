@@ -16,7 +16,7 @@
             </el-row>
             <!--列表-->
             <el-table :data="membersList" v-loading="listLoading">
-                <el-table-column label="host" prop="host" width="129"></el-table-column>
+                <el-table-column label="host" prop="host" width="129" show-overflow-tooltip></el-table-column>
                 <el-table-column label="memberId" prop="memberId" show-overflow-tooltip></el-table-column>
                 <el-table-column label="clientId" prop="clientId" show-overflow-tooltip width="149"></el-table-column>
                 <el-table-column label="assignment" prop="assignment" show-overflow-tooltip :formatter="formatAssignment"></el-table-column>
