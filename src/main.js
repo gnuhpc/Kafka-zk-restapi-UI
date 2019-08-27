@@ -12,6 +12,7 @@ import "@babel/polyfill"
 import  VueCodemirror from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
 import VueClipboard  from 'vue-clipboard2'
+import VueI18n from 'vue-i18n'
 Vue.use(VueClipboard)
 
 import echarts from 'echarts'
@@ -44,8 +45,18 @@ Vue.prototype.relationshipDatabase={
 // })
 
 /* eslint-disable no-new */
+Vue.use(VueI18n)
+const i18n = new VueI18n({
+  locale: 'zh',    // 语言标识
+  //this.$i18n.locale // 通过切换locale的值来实现语言切换
+  messages: {
+    'zh': require('./common/lang/zh'),   // 中文语言包
+    'en': require('./common/lang/en')    // 英文语言包
+  }
+})
 new Vue({
   el: '#app',
+  i18n,
   store,
   router,
   components: { App },

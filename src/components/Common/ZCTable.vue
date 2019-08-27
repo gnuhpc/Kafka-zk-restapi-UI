@@ -7,7 +7,7 @@
       <el-table :data="data"
                 ref="zc_tables"
                 style="width: 100%"
-                empty-text="暂无相关数据"
+                :empty-text="$t('m.dataNull')"
                 :header-cell-style="ZCHeaderCellStyle"
                 :cell-style="ZCCellStyle"
                 @cell-mouse-enter="ZCCellMouseEnter"
@@ -19,7 +19,7 @@
         <!--表格选择部分-->
         <el-table-column v-if="isSelect && data.length"
                          type="selection"
-                         label="全选"
+                         :label="$t('m.selectedAll')"
                          width="50">
         </el-table-column>
 
@@ -38,7 +38,7 @@
           <template slot-scope="scope">
 
             <el-dropdown trigger="click">
-              <span class="el-dropdown-link">更多操作<i class="el-icon-arrow-down"></i></span>
+              <span class="el-dropdown-link">{{$t('m.moreOperations')}}<i class="el-icon-arrow-down"></i></span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item v-for="(item,index) in operations"
                                   :key="item"
@@ -73,7 +73,7 @@
         :page-size="size?size:10" @current-change="currentChange">
         <slot class="page_desc">
           <!--当前第{{(currentPage-1)*pageSize+1}}-{{currentPage*pageSize >total?total: currentPage*pageSize}}条 共计{{total}}条-->
-          共计{{total}}条
+          {{$t('m.total')}} {{total}} {{$t('m.pieces')}}
         </slot>
       </el-pagination>
 

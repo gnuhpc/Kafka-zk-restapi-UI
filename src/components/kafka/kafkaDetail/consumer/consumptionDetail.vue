@@ -4,18 +4,18 @@
         <!--工具条-->
         <el-row :gutter="100">
           <el-col :span="4" style="padding-bottom: 6px;">
-            <el-button type="primary" size="mini" @click="openOffsetDialog('all','')" plain>全部重置Offset</el-button>
+            <el-button type="primary" size="mini" @click="openOffsetDialog('all','')" plain>{{$t('m.resetAllOffset')}}</el-button>
           </el-col>
           <el-col :span="6" :offset="14" style="padding-bottom: 6px;">
             <div class="pull-right">
-            <el-button type="primary" size="mini" @click="refreshData" plain>刷新</el-button>
-            <el-button type="primary" size="mini" @click="goBack" plain>返回</el-button>
+            <el-button type="primary" size="mini" @click="refreshData" plain>{{$t('m.refresh')}}</el-button>
+            <el-button type="primary" size="mini" @click="goBack" plain>{{$t('m.back')}}</el-button>
           </div>
           </el-col>
         </el-row>
         <table class="tableBox table-border" v-if="activeName=='tab-one'">
             <tr>
-              <td><label>consumer名称</label></td>
+              <td><label>{{$t('m.consumerName')}}</label></td>
               <td>{{dataNew.groupId}}</td>
             </tr>
             <tr>
@@ -29,29 +29,29 @@
           </table>
           <table class="tableBox table-border" v-else>
             <tr>
-              <td><label>consumer名称</label></td>
+              <td><label>{{$t('m.consumerName')}}</label></td>
               <td>{{dataOld.consumerName}}</td>
             </tr>
           </table>
         <!--列表-->
         <el-table v-loading="listLoading" :data="listData">
-          <el-table-column label="Topic名称" prop="topic" min-width="8%" show-overflow-tooltip></el-table-column>
-          <el-table-column label="分区ID" prop="partitionId" sortable min-width="8%"></el-table-column>
+          <el-table-column :label="$t('m.topicName')" prop="topic" min-width="8%" show-overflow-tooltip></el-table-column>
+          <el-table-column :label="$t('m.partitionID')" prop="partitionId" sortable min-width="8%"></el-table-column>
           <el-table-column label="host" prop="host" sortable min-width="10%" show-overflow-tooltip></el-table-column>
           <el-table-column label="consumerId" prop="consumerId" show-overflow-tooltip sortable min-width="14%"></el-table-column>
           <el-table-column label="coordinator" prop="coordinator.id" sortable min-width="12%">
           </el-table-column>
           <el-table-column label="clientId" prop="clientId" sortable min-width="9%"></el-table-column>
-          <el-table-column label="LogEnd偏移量" prop="logEndOffset" min-width="10%"></el-table-column>
-          <el-table-column label="当前偏移量" prop="currentOffset" min-width="10%"></el-table-column>
-          <el-table-column label="延迟Lag" prop="lag" min-width="8%"></el-table-column>
-          <el-table-column label="操作" min-width="12%">
+          <el-table-column :label="$t('m.logEndOffset')" prop="logEndOffset" min-width="10%"></el-table-column>
+          <el-table-column :label="$t('m.currentOffset')" prop="currentOffset" min-width="10%"></el-table-column>
+          <el-table-column :label="$t('m.delayLag')" prop="lag" min-width="8%"></el-table-column>
+          <el-table-column :label="$t('m.operate')" min-width="12%">
             <template slot-scope="scope">
               <el-dropdown size="mini">
-                <el-button size="mini" type="primary">更多操作<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+                <el-button size="mini" type="primary">{{$t('m.moreOperations')}}<i class="el-icon-arrow-down el-icon--right"></i></el-button>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item type="text" @click.native="openOffsetDialog('one',scope.row)">重置Offset</el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="getLastCommitTime(scope.row)">查看最后提交时间</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="openOffsetDialog('one',scope.row)">{{$t('m.resetOffset')}}</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="getLastCommitTime(scope.row)">{{$t('m.viewLastTime')}}</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </template>
@@ -60,40 +60,40 @@
         <pagination :total='total' @pageChange="handleChange"></pagination>
       </section>
       <!--重置Offset-->
-      <el-dialog title="重置Offset" :visible.sync="dialogVisible">
+      <el-dialog :title="$t('m.resetOffset')" :visible.sync="dialogVisible">
         <el-form v-if="offset.type=='one'">
-          <el-form-item label="传值方式">
+          <el-form-item :label="$t('m.valueType')">
             <el-radio-group v-model="offset.optionType">
-              <el-radio label="type1">输入offset</el-radio>
-              <el-radio label="type2">设置选项</el-radio>
-              <el-radio label="type3">时间戳</el-radio>
+              <el-radio label="type1">{{$t('m.inputOffset')}}</el-radio>
+              <el-radio label="type2">{{$t('m.setOption')}}</el-radio>
+              <el-radio label="type3">{{$t('m.timestamp')}}</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item v-if="offset.optionType=='type1'" :label="'offset:offset值大于等于'+offset.startOffset+',小于等于'+offset.endOffset">
+          <el-form-item v-if="offset.optionType=='type1'" :label="'offset:offset'+$t('m.greaterOrEqual')+offset.startOffset+','+$t('m.lessOrEqual')+offset.endOffset">
             <el-input v-model="offset.offset"></el-input>
           </el-form-item>
-          <el-form-item v-if="offset.optionType=='type2'" label="设置选项">
+          <el-form-item v-if="offset.optionType=='type2'" :label="$t('m.setOption')">
             <el-select v-model="offset.value" style="width: 100%;">
-              <el-option v-for="item in offset.options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
+              <el-option key="earliest" :label="$t('m.earliest')" value="earliest"></el-option>
+              <el-option key="latest" :label="$t('m.latest')" value="latest"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item v-if="offset.optionType=='type3'" label="设置时间">
-            <el-date-picker v-model="offset.timeStamp" type="datetime" placeholder="请选择日期时间" style="width: 100%;">
+          <el-form-item v-if="offset.optionType=='type3'" :label="$t('m.setTime')">
+            <el-date-picker v-model="offset.timeStamp" type="datetime" :placeholder="$t('m.tipSelectTime')" style="width: 100%;">
             </el-date-picker>
           </el-form-item>
         </el-form>
         <el-form v-if="offset.type=='all'">
-          <el-form-item label="设置选项">
+          <el-form-item :label="$t('m.setOption')">
             <el-select v-model="offset.value" style="width: 100%;">
-              <el-option v-for="item in offset.options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
+              <el-option key="earliest" :label="$t('m.earliest')" value="earliest"></el-option>
+              <el-option key="latest" :label="$t('m.latest')" value="latest"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="resetOffset">确定</el-button>
+          <el-button @click="dialogVisible = false">{{$t('m.cancel')}}</el-button>
+          <el-button type="primary" @click="resetOffset">{{$t('m.confirm')}}</el-button>
         </div>
       </el-dialog>
   </section>
@@ -104,7 +104,7 @@
   import "@/styles/paas_style_element.css"
   import api from '@/api/topic'
   import pagination from "@/components/resourceApplication/page";
-  export default {
+  export default{
     components: {
       pagination
     },
@@ -125,10 +125,10 @@
           optionType: 'type1',
           options: [{
             value: 'earliest',
-            label: '设置为最初'
+            label: this.$i18n.t('m.earliest')
           }, {
             value: 'latest',
-            label: '设置为最新'
+            label:this.$i18n.t('m.latest')
           }
           ],
           value: 'earliest',
@@ -222,7 +222,7 @@
           let selectCluster=this.clusterId
           api.kafkaPackFunction(`/kafka/consumergroup/${datas.consumergroup}/${datas.type}/topic/${datas.topic}/${datas.partition}/${datas.offset}`, "put",selectCluster).then(res => {
             if(res.data.reply.result.connectionRefused!==undefined){
-              this.$message.error("微服务拒绝连接")
+              this.$message.error(this.$i18n.t('m.tipConnect'))
               return;
             }
             if (res.data.reply.result.data.msg !== undefined) {
@@ -233,7 +233,7 @@
             if (res.data.reply.result.data.state === 'success') {
               this.$emit('refreshDetail', this.optionData)
               this.$message({
-                message: '重置成功',
+                message:this.$i18n.t('m.tipResetSuccess'),
                 type: 'success'
               })
             }
@@ -252,11 +252,11 @@
                 if (res.data.reply.result.data.state === 'success') {
                   this.$emit('refreshDetail', this.optionData)
                   this.$message({
-                    message: '重置成功',
+                    message: this.$i18n.t('m.tipResetSuccess'),
                     type: 'success'
                   })
                 } else {
-                  this.$message.error('重置失败')
+                  this.$message.error(this.$i18n.t('m.tipResetFailed'))
                 }
               })
             } else {
@@ -281,23 +281,23 @@
           }
           if (_this.optionData.type === 'NEW') {
             if (res.data.reply.result.data.new === undefined) {
-              this.$message.error('无法获取最后提交时间')
+              this.$message.error(this.$i18n.t('m.tipLastTimeNull'))
               return
             }
             if (res.data.reply.result.data.new[partitionId] !== -1) {
-              this.$message.success('最后提交时间：' + new Date(res.data.reply.result.data.new[partitionId]).toLocaleString())
+              this.$message.success(this.$i18n.t('m.tipLastTime') + new Date(res.data.reply.result.data.new[partitionId]).toLocaleString())
             } else {
-              this.$message.error('无法获取最后提交时间')
+              this.$message.error(this.$i18n.t('m.tipLastTimeNull'))
             }
           } else {
             if (res.data.reply.result.data.old === undefined) {
-              this.$message.error('无法获取最后提交时间')
+              this.$message.error(this.$i18n.t('m.tipLastTimeNull'))
               return
             }
             if (res.data.reply.result.data.old[partitionId] !== -1) {
-              this.$message.success('最后提交时间：' + new Date(res.data.reply.result.data.old[partitionId]).toLocaleString())
+              this.$message.success(this.$i18n.t('m.tipLastTime') + new Date(res.data.reply.result.data.old[partitionId]).toLocaleString())
             } else {
-              this.$message.error('无法获取最后提交时间')
+              this.$message.error(this.$i18n.t('m.tipLastTimeNull'))
             }
           }
         })
@@ -305,7 +305,7 @@
       //刷新
       async refreshData(){
         await this.$emit('refreshDetail', this.optionData)
-        this.$message.success('已刷新！')
+        this.$message.success(this.$i18n.t('m.refreshed'))
       }
     }
   }

@@ -5,13 +5,13 @@
       <el-col :span="4" :offset="20" style="padding-bottom: 6px;">
         <div class="pull-right">
           <el-button class="margin-left0" type="primary" size="mini" plain @click="goBack">
-            返回
+            {{$t('m.back')}}
           </el-button>
         </div>
       </el-col>
       <table class="tableBox table-border" v-if="activeName=='tab-one'">
         <tr>
-          <td><label>consumer名称</label></td>
+          <td><label>{{$t('m.consumerName')}}</label></td>
           <td>{{dataNew.groupId}}</td>
         </tr>
         <tr>
@@ -25,21 +25,21 @@
       </table>
       <table class="tableBox table-border" v-else>
         <tr>
-          <td><label>consumer名称</label></td>
+          <td><label>{{$t('m.consumerName')}}</label></td>
           <td>{{dataOld.consumerName}}</td>
         </tr>
       </table>
       <!--列表-->
       <el-table v-loading="listLoading" :data="consumerDetails">
-        <el-table-column label="Topic名称" min-width="50%">
+        <el-table-column :label="$t('m.topicName')" min-width="50%">
           <template slot-scope="scope">{{scope.row}}</template>
         </el-table-column>
-        <el-table-column min-width="30%" label="操作">
+        <el-table-column min-width="30%" :label="$t('m.operate')">
           <template slot-scope="scope">
             <el-dropdown size="mini">
-              <el-button size="mini" type="primary">更多操作<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+              <el-button size="mini" type="primary">{{$t('m.moreOperations')}}<i class="el-icon-arrow-down el-icon--right"></i></el-button>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item type="text" @click.native="viewConsuptionDetail(scope.row)">查看消费详情</el-dropdown-item>
+                <el-dropdown-item type="text" @click.native="viewConsuptionDetail(scope.row)">{{$t('m.consumerDetail')}}</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </template>
@@ -90,7 +90,7 @@
         api.kafkaPackFunction(`/kafka/consumergroups/${this.query.type}/topic/${this.query.topic}`, "get", selectCluster).then(res => {
           this.listLoading = false;
           if (res.data.reply.result.connectionRefused !== undefined) {
-            this.$message.error("连接超时，请刷新重试")
+            this.$message.error(this.$i18n.t('m.tipConnectTimeout'))
             return;
           }
           if (res.data.reply.result.data.developerMessage !== undefined) {

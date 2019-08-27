@@ -15,14 +15,14 @@
         <el-table-column v-if="isSelect && data.length"
                          fixed
                          type="selection"
-                         label="全选"
+                         :label="$t('m.selectedAll')"
                          :width="selectColumnWidth">
         </el-table-column>
 
         <!--表格序号部分-->
         <el-table-column v-if="isIndex && data.length"
                          type="index"
-                         label="序号"
+                         :label="$t('m.index')"
                          :width="indexColumnWidth">
         </el-table-column>
 
@@ -38,11 +38,11 @@
 
         <!--表格操作部分-->
         <el-table-column v-if="handles && handles.length && data.length"
-                         label="操作"
+                         :label="$t('m.operate')"
                          :width="handleColumnWidth">
           <template slot-scope="scope">
             <el-dropdown trigger="click">
-              <span class="handleTitle">更多操作<i class="el-icon-arrow-down"></i></span>
+              <span class="handleTitle">{{$t('m.moreOperations')}}<i class="el-icon-arrow-down"></i></span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item v-for="(item,index) in handles[scope.row.rowIndex]"
                                   :key="item.name" @click.native="ZCTableHandleDropdownClick(scope.row.rowIndex,index)">

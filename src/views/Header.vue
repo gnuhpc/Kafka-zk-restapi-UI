@@ -7,6 +7,17 @@
                 </div>-->
                 <label style="font-size: 25px;">KAFKA</label>
             </el-col>
+            <el-col :span="3" style="padding-right: 15px;padding-top: 20px;float: right;">
+                <el-dropdown style="float: right;">
+                    <span class="el-dropdown-link">
+                        {{locale}}<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item @click.native="changeLocale('zh')">中文</el-dropdown-item>
+                        <el-dropdown-item @click.native="changeLocale('en')">English</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </el-col>
         </el-row>
     </div>
 </template>
@@ -24,7 +35,8 @@
                 activeName: 'main',
                 menuTree: [],
                 userName: '',
-                route: ''
+                route: '',
+                locale:'中文'
             }
         },
         watch: {
@@ -108,13 +120,22 @@
                 })
                 sessionStorage.clear();
             },
+            changeLocale(locale){
+                if(locale=='zh'){
+                    this.locale="中文"
+                }else{
+                    this.locale="English"
+                }
+                this.$i18n.locale=locale
+                console.info(this.$i18n.locale)
+            }
         },
     }
 </script>
 import '@/assets/iconfont-all/iconfont.css';
 <style rel="stylesheet/scss" lang="scss">
     #topNav {
-        min-width: 1090px;
+        width:100%;
         background: url('../assets/headerImg/01.png') -32px no-repeat;
         background-color: #f8f8f8;
     }
