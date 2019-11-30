@@ -53,7 +53,7 @@
     "vue-validator": "^3.0.0-alpha.2",
     "vuedraggable": "^2.16.0",
     "vuex": "3.0.1",
-    "webpack-dev-server": "^2.9.7",
+    "webpack-dev-server": "^3.1.11",
     "xlsx": "^0.11.19"
   },
   "devDependencies": {
@@ -112,7 +112,7 @@
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-dev-server": "^2.9.1",
+    "webpack-dev-server": "^3.1.11",
     "webpack-merge": "^4.1.0"
   },
   "engines": {
