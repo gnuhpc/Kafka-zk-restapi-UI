@@ -3,52 +3,52 @@
     <section v-show="mainContentVisible">
       <el-row>
         <el-col :span="18" style="padding-bottom: 6px;">
-          <el-button class="margin-left0" type="primary" size="mini" @click="addPartitionsVisible = true;ruleFormData.partitionsNum='';ruleFormData.replicaAssignment=''" plain>添加分区
+          <el-button class="margin-left0" type="primary" size="mini" @click="addPartitionsVisible = true;ruleFormData.partitionsNum='';ruleFormData.replicaAssignment=''" plain>{{$t('m.addPartition')}}
           </el-button>
-          <el-button class="margin-left0" type="primary" size="mini" @click="partitionRedistryVisible = true;" plain>分区重分布
+          <el-button class="margin-left0" type="primary" size="mini" @click="partitionRedistryVisible = true;" plain>{{$t('m.partitionRedistribute')}}
           </el-button>
-          <el-button class="margin-left0" type="primary" size="mini" @click="addReplicasVisible = true" plain>添加副本
+          <el-button class="margin-left0" type="primary" size="mini" @click="addReplicasVisible = true" plain>{{$t('m.addReplicas')}}
           </el-button>
-          <el-button class="margin-left0" type="primary" size="mini" @click="partitionRedistryHand" plain>手工分区重分布
+          <el-button class="margin-left0" type="primary" size="mini" @click="partitionRedistryHand" plain>{{$t('m.partitionRedistributeManual')}}
           </el-button>
         </el-col>
         <el-col :span="6" style="padding-bottom: 6px;">
           <div class="pull-right">
-            <el-button class="margin-left0" type="primary" size="mini" @click="refreshDetail" plain>刷新</el-button>
+            <el-button class="margin-left0" type="primary" size="mini" @click="refreshDetail" plain>{{$t('m.refresh')}}</el-button>
             <!-- <el-button class="margin-left0" type="primary" size="mini" @click="goBack" plain>返回</el-button> -->
           </div>
         </el-col>
       </el-row>
       <!--列表-->
       <el-table :data="detailData.topicPartitionInfos" style="width: 100%;">
-        <el-table-column prop="topicPartitionInfo.partition" label="分区ID" min-width="8%">
+        <el-table-column prop="topicPartitionInfo.partition" :label="$t('m.partitionID')" min-width="8%">
         </el-table-column>
         <el-table-column prop="topicPartitionInfo.leader.host" label="leader" min-width="12%">
         </el-table-column>
-        <el-table-column prop="topicPartitionInfo.replicas" label="副本分布" :formatter="formatToString" min-width="12%">
+        <el-table-column prop="topicPartitionInfo.replicas" :label="$t('m.replicasRedistribute')" :formatter="formatToString" min-width="12%">
         </el-table-column>
         <el-table-column prop="topicPartitionInfo.isr" label="ISR" :formatter="formatToString2" min-width="12%">
         </el-table-column>
-        <el-table-column prop="startOffset" label="开始offset" min-width="12%">
+        <el-table-column prop="startOffset" :label="$t('m.startOffset')" min-width="12%">
         </el-table-column>
-        <el-table-column prop="endOffset" label="结束offset" min-width="12%">
+        <el-table-column prop="endOffset" :label="$t('m.endOffset')" min-width="12%">
         </el-table-column>
-        <el-table-column prop="messageAvailable" label="可用消息数" min-width="12%">
+        <el-table-column prop="messageAvailable" :label="$t('m.messageAvailable')" min-width="12%">
         </el-table-column>
-        <el-table-column label="操作" min-width="20%">
+        <el-table-column :label="$t('m.operate')" min-width="20%">
           <template slot-scope="scope">
             <el-dropdown size="mini">
-              <el-button size="mini" type="primary">更多操作<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+              <el-button size="mini" type="primary">{{$t('m.moreOperations')}}<i class="el-icon-arrow-down el-icon--right"></i></el-button>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item type="text" @click.native="viewMessageDetail(scope.row)">消费详情</el-dropdown-item>
+                <el-dropdown-item type="text" @click.native="viewMessageDetail(scope.row)">{{$t('m.consumerDetail')}}</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </template>
         </el-table-column>
       </el-table>
       <template>
-        <div style="font-size:14px;padding:10px 0;height:16px;"><strong class="solidline"></strong> leader副本 | <strong class="dashline"></strong> follower副本 |
-          <strong class="bgred"></strong> under replicated副本</div>
+        <div style="font-size:14px;padding:10px 0;height:16px;"><strong class="solidline"></strong>{{$t('m.leaderReplicas')}} | <strong class="dashline"></strong>{{$t('m.followerReplicas')}} |
+          <strong class="bgred"></strong> {{$t('m.underReplicated')}}</div>
         <div class="pull-left broker-box" v-for="(item,index) in partitionInfos">
           <label class="broker-title" style="margin-top: 5px;font-size: 14px">broker{{item.replicas}}</label>
           <div>
@@ -58,7 +58,7 @@
         </div>
       </template>
       <!-- consumer详情 -->
-      <el-dialog title="consumer详情" :visible.sync="consumerDetailVisible" width="85%">
+      <el-dialog :title="$t('m.consumerDetail')" :visible.sync="consumerDetailVisible" width="85%">
         <el-table :data="consumerDetailList" style="width: 100%;" v-loading="consumerlistLoading">
           <el-table-column prop="type" label="type" min-width="6%">
           </el-table-column>
@@ -87,75 +87,75 @@
       <!--增加分区-->
       <el-dialog title="" :visible.sync="addPartitionsVisible" width="50%">
         <el-form label-width="150px" :model="ruleFormData" :rules="rules1" ref="ruleFormData">
-          <el-form-item label="Topic名称:">
+          <el-form-item :label="$t('m.topicName')">
             <el-input v-model="detailData.topicName" :disabled="true"></el-input>
           </el-form-item>
-          <el-form-item label="添加分区个数:" prop="partitionsNum">
+          <el-form-item :label="$t('m.addPartitionNum')" prop="partitionsNum">
             <el-input v-model.number="ruleFormData.partitionsNum" @change="autoAllocationChange"></el-input>
           </el-form-item>
-          <el-form-item label="分配方式:">
+          <el-form-item :label="$t('m.allocation')">
             <el-radio-group v-model="ruleFormData.type" @change="radioSelected">
-              <el-radio label="type1">单个添加</el-radio>
-              <el-radio label="type2" @change="autoAllocation">自动分配</el-radio>
+              <el-radio label="type1">{{$t('m.singleAdd')}}</el-radio>
+              <el-radio label="type2" @change="autoAllocation">{{$t('m.autoAllocation')}}</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="broker分配策略:" v-if="ruleFormData.type=='type1'">
+          <el-form-item :label="$t('m.brokerAllocation')" v-if="ruleFormData.type=='type1'">
             <div class="pull-left" v-for="(se,index) in ruleFormData.brokersSelect" :key="se">
-              <el-select v-model="ruleFormData.brokersSelect[index]" collapse-tags placeholder="请选择broker" style="width: 80px;">
+              <el-select v-model="ruleFormData.brokersSelect[index]" collapse-tags :placeholder="$t('m.selectBroker')" style="width: 80px;">
                 <el-option v-for="item in brokers" :key="item" :value="item" :label="item"></el-option>
               </el-select>
               <span v-if="index!=ruleFormData.brokersSelect.length-1">：</span>
             </div>
             <div class="pull-left">
-              <el-button class="margin-left10" type="success" size="mini" @click="addReplicaAssignment">添加</el-button>
-              <el-button type="success" size="mini" @click="cleanReplicaAssignment">清空</el-button>
+              <el-button class="margin-left10" type="success" size="mini" @click="addReplicaAssignment">{{$t('m.add')}}</el-button>
+              <el-button type="success" size="mini" @click="cleanReplicaAssignment">{{$t('m.empty')}}</el-button>
             </div>
           </el-form-item>
           <el-form-item label="" prop="replicaAssignment" v-if="ruleFormData.type=='type1'">
             <el-input type="textarea" v-model="ruleFormData.replicaAssignment" readonly></el-input>
           </el-form-item>
           <el-form-item label="" prop="replicaAssignment" v-if="ruleFormData.type=='type2'">
-            <label class="autoTitle">"格式需满足：broker_id_for_part1_replica1:broker_id_for_part1_replica2,
-              broker_id_for_part2_replica1:broker_id_for_part2_replica2,..."</label>
+            <label class="autoTitle">{{$t('m.tipFormat')}}：broker_id_for_part1_replica1:broker_id_for_part1_replica2,
+              broker_id_for_part2_replica1:broker_id_for_part2_replica2,...</label>
             <el-input type="textarea" v-model="ruleFormData.replicaAssignment" readonly></el-input>
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="addPartitionsVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addPartitions('ruleFormData')">确 定</el-button>
+          <el-button @click="addPartitionsVisible = false">{{$t('m.cancel')}}</el-button>
+          <el-button type="primary" @click="addPartitions('ruleFormData')">{{$t('m.confirm')}}</el-button>
         </span>
       </el-dialog>
       <!--增加副本-->
       <el-dialog title="" :visible.sync="addReplicasVisible" width="40%">
         <el-form label-width="150px" :model="ruleForm" :rules="rules" ref="ruleForm">
-          <el-form-item label="Topic名称:">
+          <el-form-item :label="$t('m.topicName')">
             <el-input v-model="detailData.topicName" :disabled="true"></el-input>
           </el-form-item>
-          <el-form-item label="新增加副本数:" prop="replicasNum">
+          <el-form-item :label="$t('m.addReplicas')" prop="replicasNum">
             <el-input v-model.number="ruleForm.replicasNum"></el-input>
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="addReplicasVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addReplicas('ruleForm')">确 定</el-button>
+          <el-button @click="addReplicasVisible = false">{{$t('m.cancel')}}</el-button>
+          <el-button type="primary" @click="addReplicas('ruleForm')">{{$t('m.confirm')}}</el-button>
         </span>
       </el-dialog>
       <!--分区重分布-->
       <el-dialog title="" :visible.sync="partitionRedistryVisible" width="500px">
         <el-form label-width="150px">
-          <el-form-item label="Topic名称:">
+          <el-form-item :label="$t('m.topicName')">
             <el-input v-model="detailData.topicName" :disabled="true"></el-input>
           </el-form-item>
-          <el-form-item label="broker:">
-            <el-select v-model="brokerSelect" multiple placeholder="请选择broker">
+          <el-form-item label="broker">
+            <el-select v-model="brokerSelect" multiple :placeholder="$t('m.selectBroker')">
                 <el-option key="all" value="all" label="all"></el-option>
               <el-option v-for="item in brokers" :key="item" :value="item" :label="item"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="partitionRedistryVisible = false">取 消</el-button>
-          <el-button type="primary" @click="partitionRedistry">确 定</el-button>
+          <el-button @click="partitionRedistryVisible = false">{{$t('m.cancel')}}</el-button>
+          <el-button type="primary" @click="partitionRedistry">{{$t('m.confirm')}}</el-button>
         </span>
       </el-dialog>
     </section>
@@ -165,25 +165,25 @@
       <el-row style="padding-bottom: 0px;">
         <el-col :span="24">
           <el-form :inline="true">
-            <el-form-item label="broker间限速:">
+            <el-form-item :label="$t('m.brokerSpeedLimit')">
               <el-input size="mini" v-model="replicaAlterLogDirsThrottle" style="width: 100px;" /> MB/s
             </el-form-item>
-            <el-form-item label="broker内限速:">
+            <el-form-item :label="$t('m.brokerSpeedLimitIn')">
               <el-input size="mini" v-model="interBrokerThrottle" style="width: 100px;" /> MB/s
             </el-form-item>
-            <el-form-item label="超时时间:">
+            <el-form-item :label="$t('m.timeout')">
               <el-input size="mini" v-model="timeoutMs" style="width: 100px;" /> s
             </el-form-item>
             <el-form-item class="pull-right">
-              <el-button class="margin-left0" type="success" size="mini" @click="reassignExecute" plain>提交数据</el-button>
-              <el-button class="margin-left0" type="primary" size="mini" @click="goBackDetail" plain>返回</el-button>
+              <el-button class="margin-left0" type="success" size="mini" @click="reassignExecute" plain>{{$t('m.submitData')}}</el-button>
+              <el-button class="margin-left0" type="primary" size="mini" @click="goBackDetail" plain>{{$t('m.back')}}</el-button>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
       <template>
         <div>
-          <label>目前topic分区分布的情况:</label>
+          <label>{{$t('m.topicAllocateInfoCurrent')}}</label>
           <table id="tablePartitionsNow" class="tableBox table-border-box">
             <tr>
               <td>
@@ -196,7 +196,7 @@
               </td>
             </tr>
           </table>
-          <label>将要重新分配的分布情况:</label>
+          <label>{{$t('m.topicAllocateInfo')}}:</label>
           <table id="tablePartitionsUpdate" class="tableBox table-border-box">
             <tr>
               <td>
@@ -210,20 +210,20 @@
               </td>
             </tr>
           </table>
-          <label>重分布结果:</label>
-          <el-button class="margin-left0 pull-right" type="success" size="mini" @click="reassignCheck" plain><i class="fa fa-refresh"></i>刷新
+          <label>{{$t('m.partitionsResult')}}:</label>
+          <el-button class="margin-left0 pull-right" type="success" size="mini" @click="reassignCheck" plain><i class="fa fa-refresh"></i>{{$t('m.refresh')}}
           </el-button>
           <table id="tablePartitionsResult" class="tableBox table-border">
             <tr v-for="(value,key) in exceteResultPartitions">
               <td>{{key}}</td>
               <td v-if="value==0">
-                <el-button type="primary" size="mini">进行中</el-button>
+                <el-button type="primary" size="mini">{{$t('m.processing')}}</el-button>
               </td>
               <td v-else-if="value==1">
-                <el-button type="success" size="mini">进行结束</el-button>
+                <el-button type="success" size="mini">{{$t('m.finish')}}</el-button>
               </td>
               <td v-else>
-                <el-button type="danger" size="mini">失败</el-button>
+                <el-button type="danger" size="mini">{{$t('m.failed')}}</el-button>
               </td>
             </tr>
           </table>
@@ -236,14 +236,14 @@
       <el-col class="toolbar" style="padding-bottom: 0px;">
         <el-form :inline="true">
           <el-form-item class="pull-right">
-            <el-button class="margin-left0" type="success" size="mini" @click="reassignExecute" plain>提交数据</el-button>
-            <el-button class="margin-left0" type="primary" size="mini" @click="goBackDetail" plain>返回</el-button>
+            <el-button class="margin-left0" type="success" size="mini" @click="reassignExecute" plain>{{$t('m.submitData')}}</el-button>
+            <el-button class="margin-left0" type="primary" size="mini" @click="goBackDetail" plain>{{$t('m.back')}}</el-button>
           </el-form-item>
         </el-form>
       </el-col>
       <template>
         <div>
-          <label>目前topic分区分布的情况:</label>
+          <label>{{$t('m.topicAllocateInfoCurrent')}}:</label>
           <table class="tableBox table-border-box">
             <tr>
               <td>
@@ -256,7 +256,7 @@
               </td>
             </tr>
           </table>
-          <label>添加副本后的分布情况:</label>
+          <label>{{$t('m.replicasAllocateInfo')}}:</label>
           <table class="tableBox table-border-box">
             <tr>
               <td>
@@ -269,20 +269,20 @@
               </td>
             </tr>
           </table>
-          <label>添加副本结果:</label>
-          <el-button class="margin-left0 pull-right" type="success" size="mini" @click="reassignCheck" plain><i class="fa fa-refresh"></i>刷新
+          <label>{{$t('m.addReplicasResult')}}:</label>
+          <el-button class="margin-left0 pull-right" type="success" size="mini" @click="reassignCheck" plain><i class="fa fa-refresh"></i>{{$t('m.refresh')}}
           </el-button>
           <table class="tableBox table-border">
             <tr v-for="(value,key) in exceteResultReplicas">
               <td>{{key}}</td>
               <td v-if="value==0">
-                <el-button type="primary" size="mini">进行中</el-button>
+                <el-button type="primary" size="mini">{{$t('m.processing')}}</el-button>
               </td>
               <td v-else-if="value==1">
-                <el-button type="success" size="mini">进行结束</el-button>
+                <el-button type="success" size="mini">{{$t('m.finish')}}</el-button>
               </td>
               <td v-else>
-                <el-button type="danger" size="mini">失败</el-button>
+                <el-button type="danger" size="mini">{{$t('m.failed')}}</el-button>
               </td>
             </tr>
           </table>
@@ -295,25 +295,25 @@
       <el-row style="padding-bottom: 0px;">
         <el-col :span="24">
           <el-form :inline="true">
-            <el-form-item label="broker间限速:">
+            <el-form-item :label="$t('m.brokerSpeedLimit')">
               <el-input size="mini" v-model="replicaAlterLogDirsThrottle" style="width: 100px;" /> MB/s
             </el-form-item>
-            <el-form-item label="broker内限速:">
+            <el-form-item :label="$t('m.brokerSpeedLimitIn')">
               <el-input size="mini" v-model="interBrokerThrottle" style="width: 100px;" /> MB/s
             </el-form-item>
-            <el-form-item label="超时时间:">
+            <el-form-item :label="$t('m.timeout')">
               <el-input size="mini" v-model="timeoutMs" style="width: 100px;" /> s
             </el-form-item>
             <el-form-item class="pull-right">
-              <el-button class="margin-left0" type="success" size="mini" @click="reassignExecuteHand" plain>提交数据</el-button>
-              <el-button class="margin-left0" type="primary" size="mini" @click="goBackDetail" plain>返回</el-button>
+              <el-button class="margin-left0" type="success" size="mini" @click="reassignExecuteHand" plain>{{$t('m.submitData')}}</el-button>
+              <el-button class="margin-left0" type="primary" size="mini" @click="goBackDetail" plain>{{$t('m.back')}}</el-button>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
       <template>
         <div>
-          <label>分区分布情况:</label>
+          <label>{{$t('m.partitionAllocateInfo')}}:</label>
           <table id="tablePartitionsNow" class="tableBox table-border-box">
             <tr>
               <td>
@@ -328,7 +328,7 @@
                           :max="maxBroker" size="mini">
                         </el-input-number>
                         <span :class="{'color-blue':item1.id==item.topicPartitionInfo.leader.id,'color-green':item1.id!=item.topicPartitionInfo.leader.id,}"></span>
-                        <el-select v-model="item1.log_dirs" placeholder="请选择目录信息" size="mini" @change="change">
+                        <el-select v-model="item1.log_dirs" :placeholder="$t('m.tipSelectDirectory')" size="mini" @change="change">
                           <el-option v-for="(val1,key1) in optionDirs[item1.id]" :key="key1" :label="val1" :value="val1">
                           </el-option>
                         </el-select>
@@ -339,20 +339,20 @@
               </td>
             </tr>
           </table>
-          <label>重分布结果:</label>
-          <el-button class="margin-left0 pull-right" type="success" size="mini" @click="reassignCheckHand" plain><i class="fa fa-refresh"></i>刷新
+          <label>{{$t('m.partitionsResult')}}:</label>
+          <el-button class="margin-left0 pull-right" type="success" size="mini" @click="reassignCheckHand" plain><i class="fa fa-refresh"></i>{{$t('m.refresh')}}
           </el-button>
           <table id="tablePartitionsResult" class="tableBox table-border">
             <tr v-for="(value,key) in exceteResultPartitionsHand">
               <td>{{key}}</td>
               <td v-if="value==0">
-                <el-button type="primary" size="mini">进行中</el-button>
+                <el-button type="primary" size="mini">{{$t('m.processing')}}</el-button>
               </td>
               <td v-else-if="value==1">
-                <el-button type="success" size="mini">进行结束</el-button>
+                <el-button type="success" size="mini">{{$t('m.finish')}}</el-button>
               </td>
               <td v-else>
-                <el-button type="danger" size="mini">失败</el-button>
+                <el-button type="danger" size="mini">{{$t('m.failed')}}</el-button>
               </td>
             </tr>
           </table>
@@ -382,8 +382,8 @@
         },
         rules: {
           replicasNum: [
-            { required: true, message: '请输入副本数', trigger: 'blur' },
-            { type: 'number', message: '副本数必须为数字', trigger: 'blur' }
+            { required: true, message: this.$i18n.t('m.tipReplicasNull'), trigger: 'blur' },
+            { type: 'number', message: this.$i18n.t('m.tipReplicasNum'), trigger: 'blur' }
           ]
         },
         ruleFormData: {
@@ -395,11 +395,11 @@
         },
         rules1: {
           partitionsNum: [
-            { required: true, message: '请输入添加分区个数', trigger: 'blur' },
-            { type: 'number', message: '添加分区个数必须为数字', trigger: 'blur' }
+            { required: true, message:this.$i18n.t('m.tipPartitionNumNull'), trigger: 'blur' },
+            { type: 'number', message: this.$i18n.t('m.tipPartitionNumNUm'), trigger: 'blur' }
           ],
           replicaAssignment: [
-            { required: true, message: '分配策略不能为空', trigger: 'blur' }
+            { required: true, message:this.$i18n.t('m.tipAllocateNull'), trigger: 'blur' }
           ]
         },
         brokers: [],
@@ -598,7 +598,7 @@
             this.addReplicasVisible = false;
             if (parseInt(this.ruleForm.replicasNum) + parseInt(this.detailData.replicationFactor) > parseInt(this.brokers.length)) {
               let temp = parseInt(this.brokers.length) - parseInt(this.detailData.replicationFactor);
-              this.$message.error("最多只能添加" + temp + "个副本！")
+              this.$message.error(this.$i18n.t('m.tipReplicasMax') + temp )
               return;
             }
             let params = {}
@@ -674,7 +674,7 @@
                     }
                   }
                 }
-                this.$message.success("添加副本成功")
+                this.$message.success(this.$i18n.t('m.tipAddSuccess'))
                 this.mainContentVisible = false
                 this.addReplicasContentVisible = true
               }
@@ -788,7 +788,7 @@
         api.kafkaPackFunctionOri(uri, requestType, originalUri, selectCluster, this.checkParam).then(res => {
           if (res.data.reply.returnCode.type == "S") {
             if (res.data.reply.result.connectionRefused !== undefined) {
-              this.$message.error('微服务拒绝连接！');
+              this.$message.error(this.$i18n.t('m.tipConnect'));
               return;
             }
             if (res.data.reply.result.data.developerMessage !== undefined) {
@@ -796,7 +796,7 @@
               return;
             }
             if (res.data.reply.result.status == 200) {
-              this.$message.success('提交成功，在页面下方查看结果')
+              this.$message.success(this.$i18n.t('m.viewAllocateResult'))
               this.exceteResultPartitions = res.data.reply.result.data.partitionsReassignStatus
               //this.exceteResultReplicas = res.data.reply.result.data.replicasReassignStatus
               this.exceteResultReplicas = res.data.reply.result.data.partitionsReassignStatus
@@ -814,7 +814,7 @@
         let selectCluster = this.clusterId
         api.kafkaPackFunctionOri(`/kafka/partitions/reassign/check`, "put", originalUri, selectCluster, this.checkParam).then(res => {
           if (res.data.reply.result.connectionRefused == "connectionRefused") {
-            this.$message.error('微服务拒绝连接！');
+            this.$message.error(this.$i18n.t('m.tipConnect'));
             return;
           }
           if (res.data.reply.result.data.developerMessage !== undefined) {
@@ -822,7 +822,7 @@
             return;
           }
           if (res.data.reply.result.status == 200) {
-            this.$message.success('刷新成功，在页面下方查看结果')
+            this.$message.success(this.$i18n.t('m.viewAllocateResultRefresh'))
             this.exceteResultPartitions = res.data.reply.result.data.partitionsReassignStatus
             //this.exceteResultReplicas = res.data.reply.result.data.replicasReassignStatus
             this.exceteResultReplicas = res.data.reply.result.data.partitionsReassignStatus
@@ -881,7 +881,7 @@
       //自动分配策略
       autoAllocation() {
         if (this.ruleFormData.partitionsNum.length === 0) {
-          this.$message.error('请先输入添加分区个数')
+          this.$message.error(this.$i18n.t('m.tipPartitionNumNull'))
           return
         }
         let startNum = this.brokers[0];
@@ -930,18 +930,18 @@
       //手动分配
       addReplicaAssignment: function () {
         if (this.ruleFormData.partitionsNum.length === 0) {
-          this.$message.error('请先输入添加分区个数')
+          this.$message.error(this.$i18n.t('m.tipPartitionNumNull'))
           return
         }
         if (this.ruleFormData.replicaAssignment.indexOf(',') >= 0) {
           let arr = this.ruleFormData.replicaAssignment.split(',')
           if (arr.length >= this.ruleFormData.partitionsNum) {
-            this.$message.error('以逗号为分割的个数应该等于添加分区个数,不能再添加了')
+            this.$message.error(this.$i18n.t('m.tipPartition1'))
             return
           }
         } else {
           if (this.ruleFormData.replicaAssignment.length > 0 && this.ruleFormData.partitionsNum === 1) {
-            this.$message.error('不能再添加了')
+            this.$message.error(this.$i18n.t('m.tipPartition2'))
             return
           }
         }
@@ -949,7 +949,7 @@
         for (let i = 0; i < this.ruleFormData.brokersSelect.length; i++) {
           for (let j = 0; j < this.ruleFormData.brokersSelect.length; j++) {
             if (i !== j && this.ruleFormData.brokersSelect[i] === this.ruleFormData.brokersSelect[j]) {
-              this.$message.error('选择的brokerID不能相同！')
+              this.$message.error(this.$i18n.t('m.tipBroker1'))
               return
             }
           }
@@ -971,12 +971,12 @@
         if (this.ruleFormData.replicaAssignment.indexOf(',') >= 0) {
           let arr = this.ruleFormData.replicaAssignment.split(',')
           if (arr.length !== this.ruleFormData.partitionsNum) {
-            this.$message.error('以逗号为分割的个数应该等于添加分区个数')
+            this.$message.error(this.$i18n.t('m.tipPartition3'))
             return
           }
         } else {
           if (this.ruleFormData.replicaAssignment.length > 0 && this.ruleFormData.partitionsNum !== 1) {
-            this.$message.error('以逗号为分割的个数应该等于添加分区个数')
+            this.$message.error(this.$i18n.t('m.tipPartition3'))
             return
           }
         }
@@ -1007,7 +1007,7 @@
                 return;
               }
               if(res.data.reply.result.data.developerMessage == undefined&&res.data.reply.result.data[this.detailData.topicName].msg==null) {
-                this.$message.success('添加分区成功');
+                this.$message.success(this.$i18n.t('m.tipAddSuccess'));
               }
             })
           } else {
@@ -1018,7 +1018,7 @@
       refreshDetail: function () {
         let topic = this.detailData.topicName
         this.$emit('refreshDetail', topic, false, true)
-        this.$message.success('已刷新！')
+        this.$message.success(this.$i18n.t('m.refreshed'))
       },
       //手工分区重分布
       change(val) {
@@ -1053,7 +1053,7 @@
                 if (res.data.reply.result.status == 200) {
                   replicasList[j].log_dirs = res.data.reply.result.data.currentReplicaLogDir;
                 } else {
-                  this.$message.error("获取目录路径失败")
+                  this.$message.error(this.$i18n.t('m.tipDirectoryFailed'))
                 }
               })
             }
@@ -1097,7 +1097,7 @@
             let hash = {}
             for (var j in replicas) {
               if (hash[replicas[j]]) {
-                this.$message.error('brokerID不能重复，请修改！');
+                this.$message.error(this.$i18n.t('m.tipBroker2'));
                 return;
               }
             }
@@ -1124,7 +1124,7 @@
         this.exceteResultPartitionsHand = {}
         api.kafkaPackFunctionOri(uri, requestType, originalUri, selectCluster, this.partitionsHand).then(res => {
           if (res.data.reply.result.connectionRefused == "connectionRefused") {
-            this.$message.error('微服务拒绝连接！');
+            this.$message.error(this.$i18n.t('m.tipConnect'));
             return;
           }
           if (res.data.reply.result.data.developerMessage !== undefined) {
@@ -1132,7 +1132,7 @@
             return;
           }
           if (res.data.reply.result.status == 200) {
-            this.$message.success('提交成功，在页面下方查看结果')
+            this.$message.success(this.$i18n.t('m.viewAllocateResult'))
             this.exceteResultPartitionsHand = res.data.reply.result.data.partitionsReassignStatus
           }
         })
@@ -1144,7 +1144,7 @@
         let selectCluster = this.clusterId
         api.kafkaPackFunctionOri(`/kafka/partitions/reassign/check`, "put", originalUri, selectCluster, this.partitionsHand).then(res => {
           if (res.data.reply.result.connectionRefused == "connectionRefused") {
-            this.$message.error('微服务拒绝连接！');
+            this.$message.error(this.$i18n.t('m.tipConnect'));
             return;
           }
           if (res.data.reply.result.data.developerMessage !== undefined) {
@@ -1152,7 +1152,7 @@
             return;
           }
           if (res.data.reply.result.status == 200) {
-            this.$message.success('刷新成功，在页面下方查看结果')
+            this.$message.success(this.$i18n.t('m.viewAllocateResultRefresh'))
             this.exceteResultPartitionsHand = res.data.reply.result.data.partitionsReassignStatus;
           }
         })

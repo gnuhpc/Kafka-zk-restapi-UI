@@ -36,7 +36,7 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="版本">
+                        <el-form-item :label="$t('m.version')">
                             <el-select v-model="version" size="mini" @change="versionSelect(version)">
                                 <el-option v-for="item in versionList" :key="item" :label="item" :value="item">
                                 </el-option>
@@ -44,7 +44,7 @@
                         </el-form-item>
                         <div class="pull-right">
                             <el-button class="margin-left0" type="primary" size="mini" plain @click="refreshData">
-                                刷新
+                                {{$t('m.refresh')}}
                             </el-button>
                             <!-- <el-button class="margin-left0" type="primary" size="mini" plain @click="goBack">
                                 返回
@@ -63,7 +63,7 @@
                                 @change="sliderChange"></el-slider>
                         </template>
                         <template v-else="!showDate">
-                            <el-date-picker v-model="timestemp" type="datetime" size="mini" placeholder="请选择时间" @change="getDateData"></el-date-picker>
+                            <el-date-picker v-model="timestemp" type="datetime" size="mini" :placeholder="$t('m.tipSelectTime')" @change="getDateData"></el-date-picker>
                         </template>
                     </div>
                 </el-col>
@@ -141,7 +141,7 @@
             return "Browse with offset";
         }
     })
-    export default {
+    export default{
         components: { pagination },
         props: ['detailData'],
         data() {
@@ -263,14 +263,14 @@
                     let uri = "";
                     if (this.value == "KafkaAvroDeserializer" || this.value == "AvroDeserializer") {
                         uri = `/kafka/consumer/${this.messageDetail.topic}/${this.messageDetail.partition}/${this.messageDetail.offset}`
-                            + `?maxRecords=${this.messageDetail.limit}&keyDecoder=${this.key}&valueDecoder=${this.value}&avroSchema=${this.AvroDeserializer}`
+                                + `?maxRecords=${this.messageDetail.limit}&keyDecoder=${this.key}&valueDecoder=${this.value}&avroSchema=${this.AvroDeserializer}`
                         uri = encodeURI(uri)
                         uri = uri.replace(/:/g, '%3A')
                         uri = uri.replace(/,/g, '%2C')
                         // uri=uri.replace(/25/g, '')
                     } else {
                         uri = `/kafka/consumer/${this.messageDetail.topic}/${this.messageDetail.partition}/${this.messageDetail.offset}`
-                            + `?maxRecords=${this.messageDetail.limit}&keyDecoder=${this.key}&valueDecoder=${this.value}`
+                                + `?maxRecords=${this.messageDetail.limit}&keyDecoder=${this.key}&valueDecoder=${this.value}`
                     }
                     let requestType = "get";
                     this.listLoading = true;
@@ -372,9 +372,9 @@
                     this.getTableData();
                 }
             },
-            handleSelect5() {  
+            handleSelect5() {
                 this.messageDetail.offset=parseInt(this.messageDetail.fromOffset);
-                this.$forceUpdate();              
+                this.$forceUpdate();
                 if (this.activeTab == "first-ta") {
                     this.getMessageDetail();
                 } else {
@@ -470,19 +470,19 @@
                     //    let AvroDeserializer = this.AvroDeserializer.replace(/\s/g, '%20');
                     //    AvroDeserializer=escape(AvroDeserializer);
                     uri = `/kafka/consumer/${this.messageDetail.topic}/${this.messageDetail.partition}/${browse}`
-                        + `?maxRecords=${this.messageDetail.limit}&keyDecoder=${this.key}&valueDecoder=${this.value}&avroSchema=${this.AvroDeserializer}`
+                            + `?maxRecords=${this.messageDetail.limit}&keyDecoder=${this.key}&valueDecoder=${this.value}&avroSchema=${this.AvroDeserializer}`
                     uri = encodeURI(uri)
                     uri = uri.replace(/:/g, '%3A')
                     uri = uri.replace(/,/g, '%2C')
                     uri = uri.replace(/25/g, '')
                 } else {
                     uri = `/kafka/consumer/${this.messageDetail.topic}/${this.messageDetail.partition}/${browse}`
-                        + `?maxRecords=${this.messageDetail.limit}&keyDecoder=${this.key}&valueDecoder=${this.value}`
+                            + `?maxRecords=${this.messageDetail.limit}&keyDecoder=${this.key}&valueDecoder=${this.value}`
                 }
                 api.kafkaPackFunction(uri, requestType, selectCluster).then(res => {
                     this.listLoading = false;
                     if (res.data.reply.result.connectionRefused == "connectionRefused") {
-                        this.$message.error('微服务拒绝连接！');
+                        this.$message.error(this.$i18n.t('m.tipConnect')); //微服务拒绝连接
                         return;
                     }
                     if (res.data.reply.result.data.developerMessage !== undefined) {
@@ -550,7 +550,7 @@
                             //console.log(this.header)
                             let requestType = "get";
                             let uri = `/kafka/consumer/${this.messageDetail.topic}/${this.messageDetail.partition}/${browse}`
-                                + `?maxRecords=${this.messageDetail.limit}&keyDecoder=${this.key}&valueDecoder=${this.value}&avroSchema=${this.AvroDeserializer}`
+                                    + `?maxRecords=${this.messageDetail.limit}&keyDecoder=${this.key}&valueDecoder=${this.value}&avroSchema=${this.AvroDeserializer}`
                             uri = encodeURI(uri)
                             uri = uri.replace(/:/g, '%3A')
                             uri = uri.replace(/,/g, '%2C')
@@ -558,7 +558,7 @@
                             api.kafkaPackFunction(uri, requestType, selectCluster).then(res => {
                                 this.tableLoading = false;
                                 if (res.data.reply.result.connectionRefused == "connectionRefused") {
-                                    this.$message.error('微服务拒绝连接！');
+                                    this.$message.error(this.$i18n.t('m.tipConnect'));//微服务拒绝连接
                                     return;
                                 }
                                 if (res.data.reply.result.data.developerMessage !== undefined) {
@@ -584,12 +584,12 @@
                         this.AvroDeserializer = "";
                         let uri = "";
                         uri = `/kafka/consumer/${this.messageDetail.topic}/${this.messageDetail.partition}/${browse}`
-                            + `?maxRecords=${this.messageDetail.limit}&keyDecoder=${this.key}&valueDecoder=${this.value}`
+                                + `?maxRecords=${this.messageDetail.limit}&keyDecoder=${this.key}&valueDecoder=${this.value}`
                         let requestType = "get";
                         api.kafkaPackFunction(uri, requestType, selectCluster).then(res => {
                             this.tableLoading = false;
                             if (res.data.reply.result.connectionRefused == "connectionRefused") {
-                                this.$message.error('微服务拒绝连接！');
+                                this.$message.error(this.$i18n.t('m.tipConnect'));//微服务拒绝连接
                                 return;
                             }
                             if (res.data.reply.result.data.developerMessage !== undefined) {

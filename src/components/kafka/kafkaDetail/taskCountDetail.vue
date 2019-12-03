@@ -3,14 +3,14 @@
         <section>
             <el-row style="padding-bottom: 6px;">
                 <el-col :span="6">
-                    <span class="paas_title">迁移任务列表</span>
+                    <span class="paas_title">{{$t('m.taskList')}}</span>
                 </el-col>
                 <el-col :span="18">
                     <div class="pull-right">
-                        <el-button type="primary" size="mini" @click="stopTask" plain>终止迁移任务</el-button>
-                        <el-button class="margin-left0" type="primary" size="mini" @click="reassignCheck" plain>刷新
+                        <el-button type="primary" size="mini" @click="stopTask" plain>{{$t('m.taskStop')}}</el-button>
+                        <el-button class="margin-left0" type="primary" size="mini" @click="reassignCheck" plain>{{$t('m.refresh')}}
                         </el-button>
-                        <el-button class="margin-left0" type="primary" size="mini" @click="goBack" plain>返回</el-button>
+                        <el-button class="margin-left0" type="primary" size="mini" @click="goBack" plain>{{$t('m.back')}}</el-button>
                     </div>
                 </el-col>
             </el-row>
@@ -32,7 +32,7 @@
     import "@/styles/kafka.css";
     import "@/styles/paas_style_element.css"
     import pagination from "@/components/resourceApplication/page";
-    export default {
+    export default{
         components: {
             pagination
         },
@@ -68,13 +68,13 @@
                 api.kafkaPackFunctionOri(uri, requestType, originalUri, selectCluster).then(res => {
                     this.listLoading = false;
                     if (res.data.reply.result.connectionRefused !== undefined) {
-                        this.$message.error("微服务拒绝连接");
+                        this.$message.error(this.$i18n.t('m.tipConnect'));
                         return;
                     }
                     if (res.data.reply.result.data.code == 400) {
-                        this.$message.error("当前迁移任务数为0");
+                        this.$message.error(this.$i18n.t('m.tipTask0'));
                         return;
-                    }                   
+                    }
                     this.taskData=res.data.reply.result.data;
                     this.taskList = this.taskData.partitions;
                     this.taskList.forEach(item => {
@@ -94,10 +94,10 @@
                 let selectCluster = this.clusterId
                 api.kafkaPackFunctionOri("/kafka/partitions/reassign/stop", "put", originalUri, selectCluster).then(res => {
                     if (res.data.reply.result.data.state == "success") {
-                        this.$message.success('迁移任务终止成功')
+                        this.$message.success(this.$i18n.t('m.tipTaskSuccess'))
                         this.taskList=[];
                     } else {
-                        this.$message.error('迁移任务终止失败')
+                        this.$message.error(this.$i18n.t('m.tipTaskFailed'))
                     }
                 })
             },
