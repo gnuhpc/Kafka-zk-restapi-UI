@@ -4,19 +4,19 @@
         <section class="paas_block">
             <el-row>
                 <el-col :span="20">
-                    <span class="paas_title">Consumer详情列表</span>
+                    <span class="paas_title">{{$t('m.consumerDetailList')}}</span>
                 </el-col>
                 <el-col :span="4" style="padding-bottom: 6px;">
                     <div class="pull-right">
                     <el-button type="primary" size="mini" plain @click="goBack">
-                        返回
+                        {{$t('m.back')}}
                     </el-button>
                 </div>
                 </el-col>
             </el-row>
             <!--列表-->
             <el-table :data="membersList" v-loading="listLoading">
-                <el-table-column label="host" prop="host" width="129"></el-table-column>
+                <el-table-column label="host" prop="host" show-overflow-tooltip width="129"></el-table-column>
                 <el-table-column label="memberId" prop="memberId" show-overflow-tooltip></el-table-column>
                 <el-table-column label="clientId" prop="clientId" show-overflow-tooltip width="149"></el-table-column>
                 <el-table-column label="assignment" prop="assignment" show-overflow-tooltip :formatter="formatAssignment"></el-table-column>

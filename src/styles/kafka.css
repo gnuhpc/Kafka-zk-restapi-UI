@@ -126,32 +126,32 @@
   
   .bg-blue {    
     background: url('../assets/kafkaImg/kafka-paas_03-02.png') 0 0 no-repeat;
-    background-size:100%; 
+    background-size:100% 100%;
   }  
   
   .bg-darkYellow {
     background: url('../assets/kafkaImg/kafka-paas_03-03.png') 0 0 no-repeat;
-    background-size:100%;
+    background-size:100% 100%;
   }
   
   .bg-green {
     background: url('../assets/kafkaImg/kafka-paas_03.png') 0 0 no-repeat;
-    background-size:100%;
+    background-size:100% 100%;
   }
 
   .bg-orange {
     background: url('../assets/kafkaImg/kafka-paas_03-05.png') 0 0 no-repeat;
-    background-size:100%;
+    background-size:100% 100%;
   }
 
   .bg-lightBlue {
     background: url('../assets/kafkaImg/kafka-paas_03-06.png') 0 0 no-repeat;
-    background-size:100%;
+    background-size:100% 100%;
   }
 
   .bg-yellow {
     background: url('../assets/kafkaImg/kafka-paas_03-04.png') 0 0 no-repeat;
-    background-size:100%;
+    background-size:100% 100%;
   }
   
   .white-color {

@@ -30,7 +30,7 @@
             </el-tabs>
         </section>
         <section v-show="editSchemaVisible">
-            <el-button @click="saveSchema" class="pull-right" type="primary" size="mini" plain>保存</el-button>
+            <el-button @click="saveSchema" class="pull-right" type="primary" size="mini" plain>{{$t('m.save')}}</el-button>
             <div class="cl h5"></div>
             <div class="json" id="json" style="width:100%;height:320px;background:#fff;overflow: scroll;margin-top:10px;">
             </div>
@@ -55,7 +55,7 @@
     import $ from 'jquery'
     import api from '@/api/topic'
     import "@/styles/paas_style_element.css"
-    export default {
+    export default{
         components: {
 
         },
@@ -163,9 +163,9 @@
                 //console.log(uri)
                 api.kafkaPackFunction(uri, requestType, selectCluster).then(res => {
                     if (res.data.reply.result.data.developerMessage == undefined && res.data.reply.result.status === 200) {
-                        this.$message.success("保存成功")
+                        this.$message.success(this.$i18n.t('m.tipSaveSuccess'))
                     } else {
-                        this.$message.success("保存失败")
+                        this.$message.success(this.$i18n.t('m.tipSaveFailed'))
                     }
                 }).then(() => {
                     api.kafkaPackFunction(`/schemaregistry/subjects/${subject}/versions`, "get", selectCluster).then(res => {
@@ -242,9 +242,9 @@
                         this.funDownload($(".json").text(), `${this.topicName}`+'-value.avsc');
                     }else{
                         this.funDownload($(".json").text(), `${this.topicName}`+'-key.avsc');
-                    }                    
+                    }
                 } else {
-                    alert('浏览器不支持')
+                    alert(this.$i18n.t('m.tipBrowser'))
                 }
             }
         }

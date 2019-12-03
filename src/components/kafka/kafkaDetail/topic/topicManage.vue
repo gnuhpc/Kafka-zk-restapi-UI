@@ -6,16 +6,16 @@
         <!--工具条-->
         <el-row>
           <el-col :span="24">
-            <span class="paas_title">Topic管理列表</span>
+            <span class="paas_title">{{$t('m.topicList')}}</span>
           </el-col>
         </el-row>
         <el-row style="margin-top:10px;">
           <el-col :span="20">
-            <el-button @click="openSystemDialog" type="primary" size="mini" plain>创建Topic</el-button>
-            <el-button @click="handleDelMany" type="danger" size="mini" plain>批量删除</el-button>
+            <el-button @click="openSystemDialog" type="primary" size="mini" plain>{{$t('m.createTopic')}}</el-button>
+            <el-button @click="handleDelMany" type="danger" size="mini" plain>{{$t('m.batchDelete')}}</el-button>
           </el-col>
           <el-col :span="4">
-            <el-input size="mini" v-model="search" placeholder="请输入关键字搜索" prefix-icon="el-icon-search">
+            <el-input size="mini" v-model="search" :placeholder="$t('m.tipSearch')" prefix-icon="el-icon-search">
             </el-input>
           </el-col>
         </el-row>
@@ -28,20 +28,20 @@
               </el-table-column>
               <el-table-column prop="topic" label="topic" show-overflow-tooltip sortable width="320">
               </el-table-column>
-              <el-table-column prop="numPartition" label="分区数" sortable>
+              <el-table-column prop="numPartition" :label="$t('m.partitionNum1')" sortable>
               </el-table-column>
               <el-table-column prop="isrRate" label="isrRate" :formatter="formatRate" sortable>
               </el-table-column>
-              <el-table-column prop="replicationFactor" label="副本数" sortable>
+              <el-table-column prop="replicationFactor" :label="$t('m.replicasNum')" sortable>
               </el-table-column>
-              <el-table-column label="操作" min-width="80">
+              <el-table-column :label="$t('m.operate')" min-width="80">
                 <template slot-scope="scope">
                   <el-dropdown size="mini">
-                    <el-button size="mini" type="primary">更多操作<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+                    <el-button size="mini" type="primary">{{$t('m.moreOperations')}}<i class="el-icon-arrow-down el-icon--right"></i></el-button>
                     <el-dropdown-menu slot="dropdown">
                       <!--<el-dropdown-item type="text" @click.native="systemDetail(scope.row)">项目信息</el-dropdown-item>-->
-                      <el-dropdown-item type="text" @click.native="viewDetail(scope.row.topic,true)">详情</el-dropdown-item>
-                      <el-dropdown-item type="text" @click.native="handleDel(scope.row)">删除</el-dropdown-item>
+                      <el-dropdown-item type="text" @click.native="viewDetail(scope.row.topic,true)">{{$t('m.detail')}}</el-dropdown-item>
+                      <el-dropdown-item type="text" @click.native="handleDel(scope.row)">{{$t('m.delete')}}</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
                 </template>
@@ -57,29 +57,29 @@
       <section v-show="topicDetailVisible" class="tabBox">
         <table class="tableManage">
           <tr>
-            <td style="width:12%;"><label>topic名称</label></td>
+            <td style="width:12%;"><label>{{$t('m.topicName')}}</label></td>
             <td style="width:20%;"><span>{{detailData.topicName}}</span></td>
-            <td style="width:12%;"><label>分区数</label></td>
+            <td style="width:12%;"><label>{{$t('m.partitionNum1')}}</label></td>
             <td style="width:10%;"><span>{{detailData.partitionCount}}</span></td>
-            <td style="width:12%;"><label>副本数</label></td>
+            <td style="width:12%;"><label>{{$t('m.replicasNum')}}</label></td>
             <td style="width:10%;"><span>{{detailData.replicationFactor}}</span></td>
           </tr>
         </table>
         <div class="backButton">
-          <el-button class="margin-left0" type="primary" size="mini" @click="goBack" plain>返回</el-button>
+          <el-button class="margin-left0" type="primary" size="mini" @click="goBack" plain>{{$t('m.back')}}</el-button>
         </div>
         <el-tabs v-model="activeTab" type="card" @tab-click="handleTab">
-          <el-tab-pane label="分区信息" name="first-ta">
+          <el-tab-pane :label="$t('m.partitionInfo')" name="first-ta">
             <TopicDetail ref="topicDetail" :detailData="detailData" v-on:showTopicManage="showTopic" v-on:refreshDetail="viewDetail"></TopicDetail>
           </el-tab-pane>
-          <el-tab-pane label="消费者信息" name="second-ta">
+          <el-tab-pane :label="$t('m.consumerInfo')" name="second-ta">
             <MessageDetail ref="messageDetail" :detailData="detailData" v-on:showTopicManage="showTopic"
               v-on:refreshDetail="viewDetail"></MessageDetail>
           </el-tab-pane>
-          <el-tab-pane label="查看消息" name="third-ta">
+          <el-tab-pane :label="$t('m.viewMessage')" name="third-ta">
             <ViewMessage ref="viewMessage" :detailData="detailData" v-on:showTopicManage="showTopic" v-on:refreshDetail="viewDetail"></ViewMessage>
           </el-tab-pane>
-          <el-tab-pane label="配置信息" name="four-ta">
+          <el-tab-pane :label="$t('m.settingInfo')" name="four-ta">
             <TopicConfig ref="topiconfig" :detailData="detailData" v-on:showTopicManage="showTopic" v-on:refreshDetail="viewDetail"></TopicConfig>
           </el-tab-pane>
           <el-tab-pane label="Schema" name="five-ta">
@@ -174,40 +174,40 @@
       <section v-show="createTopicVisible" style="padding-left: 5%;padding-right: 5%;">
         <el-card class="box-card margin-top10">
           <div slot="header" class="margin-12 clearfix">
-            <el-button class="margin-left0" type="success" size="mini" @click="createTopic" plain>提交数据</el-button>
+            <el-button class="margin-left0" type="success" size="mini" @click="createTopic" plain>{{$t('m.submitData')}}</el-button>
             <el-button class="margin-left0 pull-right" type="primary" size="mini" @click="showPage(false,true,false,false)"
-              plain>返回
+              plain>{{$t('m.back')}}
             </el-button>
           </div>
           <el-collapse v-model="activeName" collapse>
             <el-collapse-item v-for="(item,index) in create.list" :key="index" :name="index">
               <el-form label-width="150px">
-                <el-form-item label="名称 *:">
+                <el-form-item :label="$t('m.name')+' *:'">
                   <el-input v-model="item.topicName"></el-input>
                 </el-form-item>
-                <el-form-item label="分配方式:">
+                <el-form-item :label="$t('m.allocation')+':'">
                   <el-radio-group v-model="item.type">
-                    <el-radio label="type1">副本数</el-radio>
-                    <el-radio label="type2">副本分配策略</el-radio>
+                    <el-radio label="type1">{{$t('m.replicasNum')}}</el-radio>
+                    <el-radio label="type2">{{$t('m.replicasAllocate')}}</el-radio>
                   </el-radio-group>
                 </el-form-item>
-                <el-form-item v-if="item.type=='type1'" label="分区数 *:">
+                <el-form-item v-if="item.type=='type1'" :label="$t('m.partitionNum1')+' *:'">
                   <el-input v-model="item.partition_name"></el-input>
                 </el-form-item>
-                <el-form-item v-if="item.type=='type1'" label="副本数 *:">
+                <el-form-item v-if="item.type=='type1'" :label="$t('m.replicasNum')+' *:'">
                   <el-input v-model="item.replicas_name"></el-input>
                 </el-form-item>
-                <el-form-item v-if="item.type=='type2'" label="副本分配策略 *:">
+                <el-form-item v-if="item.type=='type2'" :label="$t('m.replicasAllocate')+' *:'">
                   <el-input v-model="item.replicas_allocation"></el-input>
                 </el-form-item>
-                <el-form-item label="其他参数:">
+                <el-form-item :label="$t('m.otherParameter')+':'">
                   <el-collapse>
                     <el-collapse-item>
                       <div class="createConfig">
                         <el-table :data="item.configData">
-                          <el-table-column label="参数名称" prop="name" align="right">
+                          <el-table-column :label="$t('m.parameterName')" prop="name" align="right">
                           </el-table-column>
-                          <el-table-column label="值" align="right">
+                          <el-table-column :label="$t('m.value')" align="right">
                             <template slot-scope="scope">
                               <el-input v-model="scope.row.defaults" v-if="scope.row.type !== 'select'">
                               </el-input>
@@ -217,7 +217,7 @@
                               </el-select>
                             </template>
                           </el-table-column>
-                          <el-table-column label="描述" align="right">
+                          <el-table-column :label="$t('m.describe')" align="right">
                             <template slot-scope="scope">
                               <span @click="scope.row.show = !scope.row.show"><i class="el-icon-caret-bottom"></i></span>
                               <p v-show="scope.row.show">{{scope.row.desc}}</p>
@@ -253,7 +253,7 @@
   import pagination from "@/components/resourceApplication/page";
   import { getAppSystem } from "@/api/resourceApplication";
   import appUtil from "@/utils/appUtil"
-  export default {
+  export default{
     props: ['clusterSelect'],
     components: {
       TopicDetail,
@@ -312,7 +312,7 @@
         detailData: { topicPartitionInfos: [] },
         editFormRules: {
           name: [
-            { required: true, message: '请输入topic', trigger: 'blur' }]
+            { required: true, message: this.$i18n.t('m.tipTopicNull'), trigger: 'blur' }]
         },
         activeName: 0,
         create: {
@@ -443,106 +443,106 @@
               'show': false,
               'desc': "Specify the message format version the broker will use to append messages to the logs. The value should be a valid ApiVersion. Some examples are: 0.8.2, 0.9.0.0, 0.10.0, check ApiVersion for more details. By setting a particular message format version, the user is certifying that all the existing messages on disk are smaller or equal than the specified version. Setting this value incorrectly will cause consumers with older versions to break as they will receive messages with a format that they don't understand"
             },
-            {
-              'name': 'message.timestamp.type',
-              'value': ['CreateTime', 'LogAppendTime'],
-              'defaults': 'CreateTime',
-              'init': 'CreateTime',
-              'requires': false,
-              'type': 'select',
-              'show': false,
-              'desc': "Define whether the timestamp in the message is message create time or log append time. The value should be either `CreateTime` or `LogAppendTime`"
-            }, {
-              'name': 'min.cleanable.dirty.ratio',
-              'value': 0.5,
-              'defaults': 0.5,
-              'init': 0.5,
-              'requires': false,
-              'type': 'input',
-              'show': false,
-              'desc': "This configuration controls how frequently the log compactor will attempt to clean the log (assuming log compaction is enabled). By default we will avoid cleaning a log where more than 50% of the log has been compacted. This ratio bounds the maximum space wasted in the log by duplicates (at 50% at most 50% of the log could be duplicates). A higher ratio will mean fewer, more efficient cleanings but will mean more wasted space in the log."
-            }, {
-              'name': 'min.compaction.lag.ms',
-              'value': 0,
-              'defaults': 0,
-              'init': 0,
-              'requires': false,
-              'type': 'input',
-              'show': false,
-              'desc': "The minimum time a message will remain uncompacted in the log. Only applicable for logs that are being compacted."
-            }, {
-              'name': 'min.insync.replicas',
-              'value': 1,
-              'defaults': 1,
-              'init': 1,
-              'requires': false,
-              'type': 'input',
-              'show': false,
-              'desc': "When a producer sets acks to 'all' (or '-1'), this configuration specifies the minimum number of replicas that must acknowledge a write for the write to be considered successful. If this minimum cannot be met, then the producer will raise an exception (either NotEnoughReplicas or NotEnoughReplicasAfterAppend).When used together, min.insync.replicas and acks allow you to enforce greater durability guarantees. A typical scenario would be to create a topic with a replication factor of 3, set min.insync.replicas to 2, and produce with acks of 'all'. This will ensure that the producer raises an exception if a majority of replicas do not receive a write."
-            }, {
-              'name': 'preallocate',
-              'value': [true, false],
-              'defaults': 'false',
-              'init': 'false',
-              'requires': false,
-              'type': 'select',
-              'show': false,
-              'desc': "True if we should preallocate the file on disk when creating a new log segment."
-            }, {
-              'name': 'retention.bytes',
-              'value': -1,
-              'defaults': -1,
-              'init': -1,
-              'requires': false,
-              'type': 'input',
-              'show': false,
-              'desc': "This configuration controls the maximum size a partition (which consists of log segments) can grow to before we will discard old log segments to free up space if we are using the 'delete' retention policy. By default there is no size limit only a time limit. Since this limit is enforced at the partition level, multiply it by the number of partitions to compute the topic retention in bytes."
-            }, {
-              'name': 'retention.ms',
-              'value': '604800000',
-              'defaults': '604800000',
-              'init': '604800000',
-              'requires': false,
-              'type': 'input',
-              'show': false,
-              'desc': "This configuration controls the maximum time we will retain a log before we will discard old log segments to free up space if we are using the 'delete' retention policy. This represents an SLA on how soon consumers must read their data."
-            }, {
-              'name': 'segment.bytes',
-              'value': 1073741824,
-              'defaults': 1073741824,
-              'init': 1073741824,
-              'requires': false,
-              'type': 'input',
-              'show': false,
-              'desc': "This configuration controls the segment file size for the log. Retention and cleaning is always done a file at a time so a larger segment size means fewer files but less granular control over retention."
-            }, {
-              'name': 'segment.index.bytes',
-              'value': 10485760,
-              'defaults': 10485760,
-              'init': 10485760,
-              'requires': false,
-              'type': 'input',
-              'show': false,
-              'desc': "This configuration controls the size of the index that maps offsets to file positions. We preallocate this index file and shrink it only after log rolls. You generally should not need to change this setting."
-            }, {
-              'name': 'segment.jitter.ms',
-              'value': '0',
-              'defaults': '0',
-              'init': '0',
-              'requires': false,
-              'type': 'input',
-              'show': false,
-              'desc': "The maximum random jitter subtracted from the scheduled segment roll time to avoid thundering herds of segment rolling."
-            }, {
-              'name': 'segment.ms',
-              'value': '604800000',
-              'defaults': '604800000',
-              'init': '604800000',
-              'requires': false,
-              'type': 'input',
-              'show': false,
-              'desc': "This configuration controls the period of time after which Kafka will force the log to roll even if the segment file isn't full to ensure that retention can delete or compact old data."
-            }]
+              {
+                'name': 'message.timestamp.type',
+                'value': ['CreateTime', 'LogAppendTime'],
+                'defaults': 'CreateTime',
+                'init': 'CreateTime',
+                'requires': false,
+                'type': 'select',
+                'show': false,
+                'desc': "Define whether the timestamp in the message is message create time or log append time. The value should be either `CreateTime` or `LogAppendTime`"
+              }, {
+                'name': 'min.cleanable.dirty.ratio',
+                'value': 0.5,
+                'defaults': 0.5,
+                'init': 0.5,
+                'requires': false,
+                'type': 'input',
+                'show': false,
+                'desc': "This configuration controls how frequently the log compactor will attempt to clean the log (assuming log compaction is enabled). By default we will avoid cleaning a log where more than 50% of the log has been compacted. This ratio bounds the maximum space wasted in the log by duplicates (at 50% at most 50% of the log could be duplicates). A higher ratio will mean fewer, more efficient cleanings but will mean more wasted space in the log."
+              }, {
+                'name': 'min.compaction.lag.ms',
+                'value': 0,
+                'defaults': 0,
+                'init': 0,
+                'requires': false,
+                'type': 'input',
+                'show': false,
+                'desc': "The minimum time a message will remain uncompacted in the log. Only applicable for logs that are being compacted."
+              }, {
+                'name': 'min.insync.replicas',
+                'value': 1,
+                'defaults': 1,
+                'init': 1,
+                'requires': false,
+                'type': 'input',
+                'show': false,
+                'desc': "When a producer sets acks to 'all' (or '-1'), this configuration specifies the minimum number of replicas that must acknowledge a write for the write to be considered successful. If this minimum cannot be met, then the producer will raise an exception (either NotEnoughReplicas or NotEnoughReplicasAfterAppend).When used together, min.insync.replicas and acks allow you to enforce greater durability guarantees. A typical scenario would be to create a topic with a replication factor of 3, set min.insync.replicas to 2, and produce with acks of 'all'. This will ensure that the producer raises an exception if a majority of replicas do not receive a write."
+              }, {
+                'name': 'preallocate',
+                'value': [true, false],
+                'defaults': 'false',
+                'init': 'false',
+                'requires': false,
+                'type': 'select',
+                'show': false,
+                'desc': "True if we should preallocate the file on disk when creating a new log segment."
+              }, {
+                'name': 'retention.bytes',
+                'value': -1,
+                'defaults': -1,
+                'init': -1,
+                'requires': false,
+                'type': 'input',
+                'show': false,
+                'desc': "This configuration controls the maximum size a partition (which consists of log segments) can grow to before we will discard old log segments to free up space if we are using the 'delete' retention policy. By default there is no size limit only a time limit. Since this limit is enforced at the partition level, multiply it by the number of partitions to compute the topic retention in bytes."
+              }, {
+                'name': 'retention.ms',
+                'value': '604800000',
+                'defaults': '604800000',
+                'init': '604800000',
+                'requires': false,
+                'type': 'input',
+                'show': false,
+                'desc': "This configuration controls the maximum time we will retain a log before we will discard old log segments to free up space if we are using the 'delete' retention policy. This represents an SLA on how soon consumers must read their data."
+              }, {
+                'name': 'segment.bytes',
+                'value': 1073741824,
+                'defaults': 1073741824,
+                'init': 1073741824,
+                'requires': false,
+                'type': 'input',
+                'show': false,
+                'desc': "This configuration controls the segment file size for the log. Retention and cleaning is always done a file at a time so a larger segment size means fewer files but less granular control over retention."
+              }, {
+                'name': 'segment.index.bytes',
+                'value': 10485760,
+                'defaults': 10485760,
+                'init': 10485760,
+                'requires': false,
+                'type': 'input',
+                'show': false,
+                'desc': "This configuration controls the size of the index that maps offsets to file positions. We preallocate this index file and shrink it only after log rolls. You generally should not need to change this setting."
+              }, {
+                'name': 'segment.jitter.ms',
+                'value': '0',
+                'defaults': '0',
+                'init': '0',
+                'requires': false,
+                'type': 'input',
+                'show': false,
+                'desc': "The maximum random jitter subtracted from the scheduled segment roll time to avoid thundering herds of segment rolling."
+              }, {
+                'name': 'segment.ms',
+                'value': '604800000',
+                'defaults': '604800000',
+                'init': '604800000',
+                'requires': false,
+                'type': 'input',
+                'show': false,
+                'desc': "This configuration controls the period of time after which Kafka will force the log to roll even if the segment file isn't full to ensure that retention can delete or compact old data."
+              }]
           }]
         },
         multipleSelection: [],
@@ -657,7 +657,7 @@
           this.listLoading = false;
           let search = this.search;
           if (res.data.reply.result.data.developerMessage !== undefined) {
-            this.$message.error("返回数据超时，请刷新重试！")
+            this.$message.error(this.$i18n.t('m.tipResultTimeout'))
             return;
           }
           let mockTopics = res.data.reply.result.data
@@ -667,7 +667,7 @@
       },
       //批量删除
       handleDelMany() {
-        this.$confirm('确认删除该topic吗?', '提示', {
+        this.$confirm(this.$i18n.t('m.deleteConfirm'), this.$i18n.t('m.tip'), {
           type: 'warning'
         }).then(() => {
           this.listLoading = true
@@ -695,21 +695,21 @@
               if (process.env.KAFKA_TYPE === "paas") {
                 api.deleteTopicByClusterIdAndNames(params).then(res => {
                   if (res.data.reply.returnCode.type == "E") {
-                    this.$message.error("删除失败")
+                    this.$message.error(this.$i18n.t('m.tipDeleteFailed'))
                   }
                 })
               }
-              this.$message.success("删除成功");
+              this.$message.success(this.$i18n.t('m.tipDeleteSuccess'));
               this.getTopics()
             } else {
-              this.$message.error("删除失败");
+              this.$message.error(this.$i18n.t('m.tipDeleteFailed'));
             }
           })
         })
       },
       // 删除
       handleDel: function (row) {
-        this.$confirm('确认删除该topic吗?', '提示', {
+        this.$confirm(this.$i18n.t('m.deleteConfirm'),this.$i18n.t('m.tip'), {
           type: 'warning'
         }).then(() => {
           this.listLoading = true
@@ -733,14 +733,14 @@
               if (process.env.KAFKA_TYPE === "paas") {
                 api.deleteTopicByClusterIdAndNames(params).then(res => {
                   if (res.data.reply.returnCode.type == "E") {
-                    this.$message.error("删除失败")
+                    this.$message.error(this.$i18n.t('m.tipDeleteFailed'))
                   }
                 })
               }
-              this.$message.success("删除成功");
+              this.$message.success(this.$i18n.t('m.tipDeleteSuccess'));
               this.getTopics()
             } else {
-              this.$message.error("删除失败");
+              this.$message.error(this.$i18n.t('m.tipDeleteFailed'));
             }
           })
         })
@@ -778,29 +778,29 @@
         let dataListSave = [];
         for (let j = 0; j < this.create.list.length; j++) {
           if (this.create.list[j].topicName == '') {
-            this.$message.error("Topic名称不能为空")
+            this.$message.error(this.$i18n.t('m.tipTopic1')) //Topic名称不能为空
             return;
           }
           if (this.create.list[j].topicName.indexOf("_") !== -1 || this.create.list[j].topicName.indexOf(".") !== -1) {
-            this.$message.error("Topic名称不能含有_和.")
+            this.$message.error(this.$i18n.t('m.tipTopic2')) //Topic名称不能含有_和.
             return;
           }
           if (this.create.list[j].type == "type1") {
             if (!(/(^[1-9]+$)/.test(this.create.list[j].partition_name))) {
-              this.$message.error("分区数必须为正整数")
+              this.$message.error(this.$i18n.t('m.tipPartition4'))//分区数必须为正整数
               return;
             }
             if (!(/(^[1-9]+$)/.test(this.create.list[j].replicas_name))) {
-              this.$message.error("副本数必须为正整数")
+              this.$message.error(this.$i18n.t('m.tipReplicas1')) //副本数必须为正整数
               return;
             }
             if (Number(this.create.list[j].partition_name) < Number(this.create.list[j].replicas_name)) {
-              this.$message.error("副本数必须小于分区数")
+              this.$message.error(this.$i18n.t('m.tipReplicas2')) //副本数必须小于分区数
               return;
             }
           } else {
             if (this.create.list[j].replicas_allocation == '' || this.create.list[j].replicas_allocation == ' ') {
-              this.$message.error("副本分配策略不能为空")
+              this.$message.error(this.$i18n.t('m.tipReplicas3')) //副本分配策略不能为空
               return;
             }
           }
@@ -831,7 +831,7 @@
             if (configs[i].defaults !== configs[i].init) {
               if (configs[i].defaults.length === 0) {
                 this.$message({
-                  message: configs[i].name + '不能为空',
+                  message: configs[i].name +this.$i18n.t('m.tipNull'),
                   type: 'error'
                 })
                 return
@@ -857,16 +857,16 @@
             if (res.data.reply.returnCode.type == "S") {
               api.kafkaPackFunctionOri(`/kafka/topics/create`, "post", originalUri, selectCluster, dataList).then(res => {
                 if (res.data.reply.result.connectionRefused !== undefined) {
-                  this.$message.error("微服务拒绝连接");
+                  this.$message.error(this.$i18n.t('m.tipConnect'));//微服务拒绝连接
                   return;
                 }
                 if (res.data.reply.result.status == 201) {
                   this.showPage(false, true, false, false)
 
-                  this.$message.success("创建成功");
+                  this.$message.success(this.$i18n.t('m.tipCreateSuccess')); //创建成功
                   api.kafkaPackFunction(`/kafka/topicsbrief`, "get", selectCluster).then(res => {
                     if (res.data.reply.result.connectionRefused !== undefined) {
-                      this.$message.error("微服务拒绝连接")
+                      this.$message.error(this.$i18n.t('m.tipConnect')) //微服务拒绝连接
                       return;
                     }
                     let mockTopics = res.data.reply.result.data
@@ -874,7 +874,7 @@
                     this.total = this.filters.length
                   })
                 } else {
-                  this.$message.error("创建失败");
+                  this.$message.error(this.$i18n.t('m.tipCreateFailed')); //创建失败
                 }
               })
             }
@@ -882,16 +882,16 @@
         }else{
           api.kafkaPackFunctionOri(`/kafka/topics/create`, "post", originalUri, selectCluster, dataList).then(res => {
             if (res.data.reply.result.connectionRefused !== undefined) {
-              this.$message.error("微服务拒绝连接");
+              this.$message.error(this.$i18n.t('m.tipConnect'));//微服务拒绝连接
               return;
             }
             if (res.data.reply.result.status == 201) {
               this.showPage(false, true, false, false)
 
-              this.$message.success("创建成功");
+              this.$message.success(this.$i18n.t('m.tipCreateSuccess')); //创建成功
               api.kafkaPackFunction(`/kafka/topicsbrief`, "get", selectCluster).then(res => {
                 if (res.data.reply.result.connectionRefused !== undefined) {
-                  this.$message.error("微服务拒绝连接")
+                  this.$message.error(this.$i18n.t('m.tipConnect'));//微服务拒绝连接
                   return;
                 }
                 let mockTopics = res.data.reply.result.data
@@ -899,7 +899,7 @@
                 this.total = this.filters.length
               })
             } else {
-              this.$message.error("创建失败");
+              this.$message.error(this.$i18n.t('m.tipCreateFailed')); //创建失败
             }
           })
         }

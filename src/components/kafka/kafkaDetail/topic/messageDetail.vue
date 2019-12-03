@@ -5,13 +5,13 @@
             <el-row :gutter="12" style="margin-bottom:6px;">
                 <div class="pull-right">
                     <el-col :span="17">
-                        <el-input size="mini" v-model="searchms" placeholder="请输入关键字搜索" prefix-icon="el-icon-search">
+                        <el-input size="mini" v-model="searchms" :placeholder="$t('m.tipSearch')" prefix-icon="el-icon-search">
                             <!-- <el-button slot="append" icon="el-icon-search" v-on:click="resetGroupName" size="mini"
                                     type="primary" plain></el-button> -->
                         </el-input>
                     </el-col>
                     <el-col :span="4">
-                        <el-button type="primary" size="mini" plain @click="refreshData">刷新</el-button>
+                        <el-button type="primary" size="mini" plain @click="refreshData">{{$t('m.refresh')}}</el-button>
                         <!-- <el-button class="margin-left0" type="primary" size="mini" plain @click="goBack">返回</el-button> -->
                     </el-col>
                 </div>

@@ -15,23 +15,23 @@
                 <tr style="background:#f5f5f5;">
                     <th>key</th>
                     <th>value</th>
-                    <th>操作</th>
+                    <th>{{$t('m.operate')}}</th>
                 </tr>
                 <tr v-for="(item,index) in topicConfigs" :key="index">
                     <td min-width="25%">{{item.name}}</td>
                     <td min-width="25%">{{item.value}}</td>
                     <td min-width="25%">
                         <el-dropdown size="mini">
-                            <el-button size="mini" type="primary">更多操作<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+                            <el-button size="mini" type="primary">{{$t('m.moreOperations')}}<i class="el-icon-arrow-down el-icon--right"></i></el-button>
                             <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item type="text" @click.native="openUpdateConf(item)">修改</el-dropdown-item>
+                                <el-dropdown-item type="text" @click.native="openUpdateConf(item)">{{$t('m.edit')}}</el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
                     </td>
                 </tr>
             </table>
             <!--修改配置-->
-            <el-dialog title="配置选项修改" :visible.sync="configs.updateDialogVisible">
+            <el-dialog :title="$t('m.setOptionEdit')" :visible.sync="configs.updateDialogVisible">
                 <el-form>
                     <el-form-item :label="configs.key">
                         <el-select v-model="configs.value" v-if="configs.key == 'compression.type'">
@@ -50,8 +50,8 @@
                     </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
-                    <el-button @click="configs.updateDialogVisible = false">取消</el-button>
-                    <el-button type="primary" @click="updateTopicConf">确定</el-button>
+                    <el-button @click="configs.updateDialogVisible = false">{{$t('m.cancel')}}</el-button>
+                    <el-button type="primary" @click="updateTopicConf">{{$t('m.confirm')}}</el-button>
                 </div>
             </el-dialog>
         </section>
@@ -60,7 +60,7 @@
 </template>
 <script>
     import api from '@/api/topic'
-    export default {
+    export default{
         props: ['detailData'],
         data() {
             return {
@@ -88,7 +88,7 @@
                 this.listLoading = true;
                 this.configs.topic = newData.topicName;
                 this.clusterId=JSON.parse(sessionStorage.getItem('kafkaclusterSelect'))
-                let selectCluster=this.clusterId 
+                let selectCluster=this.clusterId
                 api.kafkaPackFunction(`/kafka/topics/${this.configs.topic}/conf`, "get",selectCluster).then(res => {
                     this.listLoading = false;
                     if (res.data.reply.result.data.developerMessage == undefined) {
@@ -96,7 +96,7 @@
                     } else {
                         this.$message.error(res.data.reply.result.data.developerMessage)
                     }
-                })               
+                })
             }
         },
         methods: {
@@ -111,7 +111,7 @@
                 datas.key = this.configs.key
                 datas.value = this.configs.value
                 this.clusterId=JSON.parse(sessionStorage.getItem('kafkaclusterSelect'))
-                let selectCluster=this.clusterId 
+                let selectCluster=this.clusterId
                 api.kafkaPackFunction(`/kafka/topics/${this.configs.topic}/conf/${this.configs.key}=${this.configs.value}`, "put",selectCluster).then(res => {
                     this.configs.updateDialogVisible = false
                     if (res.data.reply.result.data.developerMessage !== undefined) {
@@ -122,7 +122,7 @@
                     } else {
                         this.topicConfigs = res.data.reply.result.data
                         this.$message({
-                            message: '修改成功',
+                            message:this.$i18n.t('m.tipEditSuccess'),
                             type: 'success'
                         })
                     }

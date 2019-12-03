@@ -6,13 +6,13 @@
           <!--工具条-->
           <section v-show="consumerGroupVisibleNew" class="detailList">
             <el-col :span="4" :offset="20" style="padding-bottom: 6px;">
-              <el-input size="mini" v-model="search1" placeholder="请输入关键字搜索" prefix-icon="el-icon-search">
+              <el-input size="mini" v-model="search1" :placeholder="$t('m.tipSearch')" prefix-icon="el-icon-search">
               </el-input>
             </el-col>
             <!--列表-->
             <section>
               <el-table v-loading="listLoadingNew" :data="consumerNew.slice((page-1)*pageSize,page*pageSize)">
-                <el-table-column label="consumer名称" prop="groupId" show-overflow-tooltip sortable min-width="30%"></el-table-column>
+                <el-table-column :label="$t('m.consumerName')" prop="groupId" show-overflow-tooltip sortable min-width="30%"></el-table-column>
                 <el-table-column label="state" prop="state" min-width="10%"></el-table-column>
                 <el-table-column label="coordinator" prop="coordinator.id" min-width="10%">
                 </el-table-column>
@@ -25,15 +25,15 @@
                     </div>
                   </template>
                 </el-table-column>
-                <el-table-column label="分配的分区个数" prop="num" min-width="15%">
+                <el-table-column :label="$t('m.partitionNum')" prop="num" min-width="15%">
                 </el-table-column>
-                <el-table-column label="操作" min-width="15%">
+                <el-table-column :label="$t('m.operate')" min-width="15%">
                   <template slot-scope="scope">
                     <el-dropdown size="mini">
-                      <el-button size="mini" type="primary">更多操作<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+                      <el-button size="mini" type="primary">{{$t('m.moreOperations')}}<i class="el-icon-arrow-down el-icon--right"></i></el-button>
                       <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item type="text" @click.native="detailOpenNew(scope.row)">详情</el-dropdown-item>
-                        <el-dropdown-item type="text" v-if="scope.row.state ==='EMPTY'" @click.native="deleteConsumerNew(scope.row)">删除</el-dropdown-item>
+                        <el-dropdown-item type="text" @click.native="detailOpenNew(scope.row)">{{$t('m.detail')}}</el-dropdown-item>
+                        <el-dropdown-item type="text" v-if="scope.row.state ==='EMPTY'" @click.native="deleteConsumerNew(scope.row)">{{$t('m.delete')}}</el-dropdown-item>
                       </el-dropdown-menu>
                     </el-dropdown>
                   </template>
@@ -53,20 +53,20 @@
           <!--工具条-->
           <section v-show="consumerGroupVisibleOld" class="detailList">
             <el-col :span="4" :offset="20" style="padding-bottom: 6px;">
-              <el-input size="mini" placeholder="请输入关键字搜索" prefix-icon="el-icon-search" v-model="search2">
+              <el-input size="mini" :placeholder="$t('m.tipSearch')" prefix-icon="el-icon-search" v-model="search2">
               </el-input>
             </el-col>
             <!--列表-->
             <section>
               <el-table v-loading="listLoadingOld" :data="consumerOld.slice((pageOld-1)*pageSizeOld,pageOld*pageSizeOld)">
-                <el-table-column label="consumer名称" prop="consumerName" sortable min-width="50%"></el-table-column>
-                <el-table-column label="操作" min-width="30%">
+                <el-table-column :label="$t('m.consumerName')" prop="consumerName" sortable min-width="50%"></el-table-column>
+                <el-table-column :label="$t('m.operate')" min-width="30%">
                   <template slot-scope="scope">
                     <el-dropdown size="mini">
-                      <el-button size="mini" type="primary">更多操作<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+                      <el-button size="mini" type="primary">{{$t('m.moreOperations')}}<i class="el-icon-arrow-down el-icon--right"></i></el-button>
                       <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item type="text" @click.native="detailOpenOld(scope.row)">详情</el-dropdown-item>
-                        <el-dropdown-item type="text" @click.native="deleteConsumerOld(scope.row)">删除</el-dropdown-item>
+                        <el-dropdown-item type="text" @click.native="detailOpenOld(scope.row)">{{$t('m.detail')}}</el-dropdown-item>
+                        <el-dropdown-item type="text" @click.native="deleteConsumerOld(scope.row)">{{$t('m.delete')}}</el-dropdown-item>
                       </el-dropdown-menu>
                     </el-dropdown>
                   </template>
@@ -224,7 +224,7 @@
         api.kafkaPackFunction("/kafka/consumergroups/meta", "get", selectCluster).then((res) => {
           this.listLoadingNew = false;
           if (res.data.reply.result.connectionRefused !== undefined) {
-            this.$message.error("微服务拒绝连接")
+            this.$message.error(this.$i18n.t('m.tipConnect'))
             return;
           }
           if (res.data.reply.result.data.developerMessage !== undefined) {
@@ -261,7 +261,7 @@
         api.kafkaPackFunction(`/kafka/consumergroups?type=OLD`, "get", selectCluster).then((res) => {
           this.listLoadingOld = false
           if (res.data.reply.result.connectionRefused !== undefined) {
-            this.$message.error("微服务拒绝连接")
+            this.$message.error(this.$i18n.t('m.tipConnect'))
             return;
           }
           if (res.data.reply.result.data.developerMessage !== undefined) {
@@ -287,7 +287,7 @@
       deleteConsumerNew: function (row) {
         let consumerName = row.groupId
         let type = row.type
-        this.$confirm('确认删除该数据吗?', '提示', {
+        this.$confirm(this.$i18n.t('m.deleteConfirm'), this.$i18n.t('m.tip'), {
           type: 'warning'
         }).then(() => {
           this.listLoadingNew = true
@@ -301,7 +301,7 @@
             }
             this.listLoadingNew = false
             this.$message({
-              message: '删除成功',
+              message: this.$i18n.t('m.tipDeleteSuccess'),
               type: 'success'
             })
             this.getConsumerListNew()
@@ -311,7 +311,7 @@
       deleteConsumerOld: function (row) {
         let consumerName = row.consumerName
         let type = row.type
-        this.$confirm('确认删除该数据吗?', '提示', {
+        this.$confirm(this.$i18n.t('m.deleteConfirm'), this.$i18n.t('m.tip'), {
           type: 'warning'
         }).then(() => {
           this.listLoadingOld = true
@@ -325,7 +325,7 @@
             }
             this.listLoadingOld = false
             this.$message({
-              message: '删除成功',
+              message:this.$i18n.t('m.tipDeleteSuccess'),
               type: 'success'
             })
             this.getConsumerListOld()
